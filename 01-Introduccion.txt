@@ -1,0 +1,23 @@
+Introducción
+La idea original de escribir este libro viene de las distintas formaciones y consultorías sobre JEE que he realizado en los últimos años. En la plataforma JEE existen muchos libros que tratan sobre EJBs, JPA, Spring etc. Pero casi siempre estos libros se centran en un único producto. Así pues, para muchas personas resulta realmente difícil adquirir una visión global de cómo estos productos se integran unos con otros y conforman una solución empresarial. El objetivo de este libro no trata de hacernos expertos en Hibernate o en Spring sino de ser capaces de comenzar a manejar cada uno de estos frameworks y adquirir una visión global como arquitectos de cómo construir una aplicación empresarial .Para ello vamos a construir desde cero una aplicación JEE pequeña que irá evolucionando según vayamos avanzando capítulos y se apoyará en los distintos frameworks o estándares existentes a la hora de abordar las distintas problemáticas.
+
+1. Conocimientos previos Para poder abordar los conceptos que se explican en este libro no será necesario tener unos conocimientos amplios de la plataforma Java y de JEE. Ahora bien, sí es recomendable conocer un mínimo del lenguaje Java, así como unos mínimos de JEE ,concretamente los conceptos de Servlet y JSP. Por último, serán necesarios conocimientos sobre el lenguaje HTML.
+
+2. Requerimientos de software Una vez que tenemos claros los conocimientos necesarios para abordar con garantías los distintos capítulos, vamos a listar el software que utilizaremos a la hora de crear nuestra aplicación. 
+ • Open JDK 1.6 o JDK 1.6 
+ • FireFox 
+ • Web Developer 
+ • Eclipse JEE 
+ • Tomcat 7 
+ • MySQL 
+ • Ubuntu 10.10 o Windows 7
+
+3. Instalación del entorno
+Antes de comenzar a desarrollar nuestra aplicación debemos abordar una serie de pasos previos relativos a la instalación. 
+ -Instalación JDK 1.6: En este caso simplemente nos bajamos el jdk 1.6 para Windows o bien lo instalamos desde el gestor de paquetes synaptic en caso de usar Ubuntu (open jdk).
+ - Firefox y WebDeveloper : No hay mucho que decir en esta sección simplemente obtendremos el navegador, lo instalamos y añadimos el plugin de web developer correspondiente.
+ - Eclipse JEE : Obtendremos el entorno de desarrollo eclipse y lo descomprimimos en un directorio cualquiera ya que, al estar desarrollado en java y tener instalado el jdk ,simplemente con pulsar sobre su icono el entorno se lanzara sin mayores necesidades de instalación.
+ - Tomcat 7: Obtendremos el servidor web Tomcat de la pagina de apache y lo descomprimimos en un directorio paralelo al que tenemos ubicado eclipse
+ - JEE MySQL: Bajamos el instalador e instalamos el servidor de MySQL con las opciones por defecto .Añadimos las GUI Tools o el MySQL Workbench para una gestión más sencilla del servidor .En Ubuntu podemos instalar MySQL y sus herramientas gráficas a través de Synactic. Arquitectura Java 1.6 4. Configuración del entorno Hemos instalado ya todo el software que necesitamos y acabamos de abrir el eclipse (ver imagen)
+
+Resumen Este capítulo ha servido para introducir los objetivos del libro así como para configurar el entorno de desarrollo que vamos a utilizar en capítulos posteriores. En el próximo capítulo comenzaremos con el desarrollo de la aplicación.
