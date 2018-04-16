@@ -30,7 +30,17 @@ Una vez realizadas estas dos operaciones elementales, usaremos la herramienta My
 - Compruebo que se ha creado la tabla:
 	* Se ha creado un fichero arquitecturajava.db
 		sqlite> .schema 
+- Inserto un registro:
+sqlite> insert into LIBRO(
+   ...> isbn, titulo, categoria) values
+   ...> (1,"Saludos","Categoria1");
+
+ 
 ----------------------
 
 2. Instalar el driver JDBC. (Para sqlite3)
 	- Descargo el drver sqlite-jdbc-3.7.2.jar y lo dejo en la carpeta WebContent\WEB-INF\lib para que sea accesible al proyecto
+	- Creo una clase de prueba que devuelva un registro (PruebaConexion.java) -->OK --> Configurada la BBDD
+	
+3. Creación de JSP
+	- Creo un JSP InsertarLibro.jsp (Hola MUNDO) en Web COntent
