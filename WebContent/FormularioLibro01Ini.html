@@ -1,15 +1,50 @@
-<!DOCTYPE html>
-<html>
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="es" lang="es">
+
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Formulario Libro</title>
+<style type="text/css">
+	legend,label {
+		font-weight:bold;
+	}
+	p {
+		text-align:right;
+		width:300px;
+	}		
+</style>
+<script type="text/javascript">
+	function validacion() {
+		var isbn = document.getElementById("isbn");
+		var miFormulario = document.getElementById("isbn")
+		if (isbn.value == "") {
+			alert("Datos no válidos")
+		} else {
+			miFormulario.submit()
+		}
+	}
+</script>
 </head>
 <body>
-<form action="">
-	ISBN: <input type="text" name="ISBN" ></input><br>
-	Título: <input type="text" name="Titulo" ></input><br>
-	Categoría: <input type="text" name="Categoria" ></input><br>
-	<input type="submit" value="Enviar"></input>
+<form id="miformulario" action="">
+	<fieldset>
+		<legend>Formulario alta libro</legend>
+		<p>
+			<label for="isbn">ISBN:</label>
+			<input id= "isbn" type="text" name="isbn" ></input>
+		</p>
+		<p>
+			<label for="titulo">Título:</label>
+			<input id= "titulo" type="text" name="titulo" ></input>
+		</p>
+		<p>
+			<label for="titulo">Categoría:</label>
+			<input id= "categoria" type="text" name="categoria" ></input>
+		</p>
+		
+	</fieldset>
+	<input type="button" value="Insertar"  onclick="validacion();"></input>
 </form>
 </body>
 </html>

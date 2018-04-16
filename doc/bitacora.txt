@@ -33,5 +33,18 @@ Añadidas las extensiones:
 .project
 
  - Curiosamente, Eclipse ha reconocido automaticamente git y aparece en Team
+ 
+----------------------------------
+01- html
+----------------------------------
+- Creo una pagina HTML en WebContent: FormularioLibro01Ini.html 
+Campos:
+• ISBN
+• Titulo
+• Categoría
+
+- Validacion del campo isbn en JavaScript (Atención a las mayusculas en los nombres de los campos)
+- Se añaden una hoja de estilo  para que el texto salga en negrita.
+- Se añade un marco field y legend
 
 

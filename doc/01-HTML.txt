@@ -9,10 +9,23 @@ Tareas:
 	1. Construir un formulario HTML que contenga los campos necesarios para dar de alta un nuevo libro (ISBN, titulo, categoría).
 	2. Construcción de las validaciones de JavaScript que el formulario necesita para poder gestionar la información. 
 	3. Aplicar formato al formulario utilizando una hoja de estilo CSS. 
-	4. Revisión del uso correcto de etiquetas HTML en el formulario. 
-	5. Uso de etiquetas de accesibilidad en el formulario. 
+	4. Revisión del uso correcto de etiquetas HTML en el formulario. <fieldset/legend> <p> para cada párrafo
+	5. Uso de etiquetas de accesibilidad en el formulario.  <Label>
 	6. Uso de XHTML como estándar en el formulario. 
 	7. Uso de DOM como estándar a nivel de JavaScript. 
-	8. Uso de JavaScript degradable en el formulario. 
+	8. Uso de JavaScript degradable en el formulario.
 	
-Acabamos de definir el conjunto de tareas a realizar .Quizá en este momento no tengamos claras todas ellas pero se irán clarificando según las vayamos abordando.
+Uso de XHTML como estándar. XHTML es hoy por hoy el estándar que se utiliza a la hora de construir paginas HTML , en espera de que HTML 5 se imponga en el mercado. Para conseguir que nuestra pagina web cumpla con los requerimientos de XHTML, necesitamos realizar las siguientes modificaciones a nuestra página. 
+1. Añadir declaración XML al documento 
+2. Añadir DOCTYPE al documento 
+3. Añadir espacio de nombres (xml namespace) 
+4. Todas las etiquetas deben ser declaradas en minúsculas 
+5. Toda etiqueta abierta debe ser cerrada
+
+Uso de estándares DOM
+Se añade el id a cada elemento del formulario y se modificae el java script pqrq que acceda al elemento mediante DOM document.getElementById(“identificador”);
+
+
+
+Mejoras: Implementar las validaciones con HTML5 required
+	
