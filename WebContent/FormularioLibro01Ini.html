@@ -5,29 +5,11 @@
 <head>
 <meta charset="UTF-8">
 <title>Formulario Libro</title>
-<style type="text/css">
-	legend,label {
-		font-weight:bold;
-	}
-	p {
-		text-align:right;
-		width:300px;
-	}		
-</style>
-<script type="text/javascript">
-	function validacion() {
-		var isbn = document.getElementById("isbn");
-		var miFormulario = document.getElementById("isbn")
-		if (isbn.value == "") {
-			alert("Datos no válidos")
-		} else {
-			miFormulario.submit()
-		}
-	}
-</script>
+<link rel="stylesheet" type="text/css" href="css/formato.css" />
+<script type="text/javascript" src="js/validacion.js" >
 </head>
 <body>
-<form id="miformulario" action="">
+<form id="miformulario" action="destino.html" onsubmit="return validacion();">
 	<fieldset>
 		<legend>Formulario alta libro</legend>
 		<p>
@@ -44,7 +26,7 @@
 		</p>
 		
 	</fieldset>
-	<input type="button" value="Insertar"  onclick="validacion();"></input>
+	<input type="submit" value="Insertar"></input>
 </form>
 </body>
 </html>
