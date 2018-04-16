@@ -1,0 +1,36 @@
+Objetivos: 
+• Crear la pagina “InsertarLibro.jsp” que se encargará de insertar libros en nuestra base de datos. 
+• Crear la pagina “MostrarLibros.jsp” que se encargará de presentar una lista con los libros almacenados en la base de datos. 
+
+Tareas: 
+1. Construcción de la tabla Libros en un servidor MySQL. (Voy a utilizar sqlite)
+2. Instalación de un driver JDBC nativo para acceder a la base de datos desde Java. 
+3. Creación de la pagina “InsertarLibro.jsp”. 
+4. Creación de la pagina “MostrarLibros.jsp”.
+
+1. Creación de una tabla Libros 
+Para realizar esta tarea necesitamos haber instalado previamente un servidor MySQL y añadido un esquema denominado “arquitecturajava” a éste. 
+Una vez realizadas estas dos operaciones elementales, usaremos la herramienta MySQL QueryBrowser para crear una tabla con los siguientes campos: 
+• Isbn: varchar (10). 
+• Titulo: varchar (30). 
+• Categoría: varchar (30).
+
+----------------------
+- Creo una carpeta BBDD donde voy a tener el ejecutable de sqlite
+	
+- Creo la BBDD “arquitecturajava.db” -> sqlite3 arquitecturajava.db
+
+- creo la tabla
+	CREATE TABLE LIBRO(
+		isbn varchar(10),
+		titulo varchar(30),
+		categoria varchar(30)
+	);
+
+- Compruebo que se ha creado la tabla:
+	* Se ha creado un fichero arquitecturajava.db
+		sqlite> .schema 
+----------------------
+
+2. Instalar el driver JDBC. (Para sqlite3)
+	- Descargo el drver sqlite-jdbc-3.7.2.jar y lo dejo en la carpeta WebContent\WEB-INF\lib para que sea accesible al proyecto
