@@ -1,0 +1,34 @@
+
+- Crear un repositorio
+- Gestionar cada capítulo como una rama teniendo el resultado final como línea base.
+
+Desafíos:
+- Manejar cada evolutivo en una rama o un tag con git
+- Desarrollar con versiones actualizadas
+- Automatizar las construcciones con ant, maven o gradle
+- Utilizar sqlite en vez de mySql
+- Utilizar JUnit o similar para gestionar la automatización de pruebas
+- Desarrollar proyecto en Windows/Linux simultaneamente
+
+CREAR EL REPOSITORIO
+echo "# ArquitecturaJava" >> README.md
+git init
+git add README.md
+git commit -m "first commit"
+git remote add origin https://github.com/mgarmos/ArquitecturaJava.git
+git push -u origin master
+
+INICIAR UN PROYECTO WEB CON ECLIPSE
+- Creado un proyecto WEB
+	* Modificado en Resources el encoding(utf-8) y configuración de retornos de carro(Unix)
+	* JRE: 1.8.0_161 JDK compliance:1.8
+	* Tomcat V8.5
+	
+CONFIGURARA .gitignore para eclipse:
+Para hacerlo en windows he tenido que crear el fichero .gitignore. [Si no, no lo permite]
+Añadidas las extensiones:
+.settings/
+.classpath
+.project
+
+

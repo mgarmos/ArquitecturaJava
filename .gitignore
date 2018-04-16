@@ -1,0 +1,8 @@
+#
+# Project specific excludes
+#
+
+# eclipse project file
+.settings/
+.classpath
+.project
