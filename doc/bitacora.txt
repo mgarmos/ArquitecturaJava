@@ -45,6 +45,7 @@ Campos:
 
 - Validacion del campo isbn en JavaScript (Atención a las mayusculas en los nombres de los campos)
 - Se añaden una hoja de estilo  para que el texto salga en negrita.
-- Se añade un marco field y legend
+- Se añade un marco field y legend y se cambia el BR por <p>
+- Se añaden id a los campos y se modifica el java script para que se acceda al valor de los campos por DOM
 
 
