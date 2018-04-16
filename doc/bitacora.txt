@@ -23,12 +23,15 @@ INICIAR UN PROYECTO WEB CON ECLIPSE
 	* Modificado en Resources el encoding(utf-8) y configuración de retornos de carro(Unix)
 	* JRE: 1.8.0_161 JDK compliance:1.8
 	* Tomcat V8.5
+	* IMPORTANTE Context root: ArquitecturaJava
 	
-CONFIGURARA .gitignore para eclipse:
+CONFIGURAR .gitignore para eclipse:
 Para hacerlo en windows he tenido que crear el fichero .gitignore. [Si no, no lo permite]
 Añadidas las extensiones:
 .settings/
 .classpath
 .project
+
+ - Curiosamente, Eclipse ha reconocido automaticamente git y aparece en Team
 
 

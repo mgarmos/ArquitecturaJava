@@ -20,4 +20,5 @@ Antes de comenzar a desarrollar nuestra aplicación debemos abordar una serie de
  - Tomcat 7: Obtendremos el servidor web Tomcat de la pagina de apache y lo descomprimimos en un directorio paralelo al que tenemos ubicado eclipse
  - JEE MySQL: Bajamos el instalador e instalamos el servidor de MySQL con las opciones por defecto .Añadimos las GUI Tools o el MySQL Workbench para una gestión más sencilla del servidor .En Ubuntu podemos instalar MySQL y sus herramientas gráficas a través de Synactic. Arquitectura Java 1.6 4. Configuración del entorno Hemos instalado ya todo el software que necesitamos y acabamos de abrir el eclipse (ver imagen)
 
-Resumen Este capítulo ha servido para introducir los objetivos del libro así como para configurar el entorno de desarrollo que vamos a utilizar en capítulos posteriores. En el próximo capítulo comenzaremos con el desarrollo de la aplicación.
+Resumen
+Este capítulo ha servido para introducir los objetivos del libro así como para configurar el entorno de desarrollo que vamos a utilizar en capítulos posteriores. En el próximo capítulo comenzaremos con el desarrollo de la aplicación.
