@@ -3,7 +3,9 @@
 		var miFormulario = document.getElementById("isbn")
 		if (isbn.value == "") {
 			alert("Datos no válidos")
+			return false;
 		} else {
-			miFormulario.submit()
+			miFormulario.submit();
+			return true;
 		}
 	}

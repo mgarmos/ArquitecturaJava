@@ -55,9 +55,7 @@
 			<%=rs.getString("categoria") %><br></br>
 		<%
 		}
-		%>
-			<a href="./InsertarLibro.jsp">Insertar Libro</a>
-		<%
+
 		
 		
 	} catch (ClassNotFoundException e) {
@@ -80,7 +78,7 @@
 		}
 	}
 %>    
-    
+	<a href="./FormularioInsertarLibro.jsp">Insertar Libro</a>  
 	</body>
 </html>    
 
