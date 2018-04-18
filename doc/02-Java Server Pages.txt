@@ -43,4 +43,29 @@ sqlite> insert into LIBRO(
 	- Creo una clase de prueba que devuelva un registro (PruebaConexion.java) -->OK --> Configurada la BBDD
 	
 3. Creación de JSP
-	- Creo un JSP InsertarLibro.jsp (Hola MUNDO) en Web COntent
+	- Creo un JSP InsertarLibro.jsp (Hola MUNDO) en Web Content, utilizando el código de la página de HTML
+		- Hay que recuperar el contenido de las tres cajas de texto e insertarlo en BBDD:
+			String isbn = request.getParameter("isbn");
+			String titulo = request.getParameter("titulo");
+			String categoria = request.getParameter("categoria");
+			
+		- Monto el JSP con el código de la página java y pruebo. -> Ok (Sigue haciendo el submit a pesar de la validación)
+		- Añado el código para insertar un registro en la BBDD a partir del código de prueba que inserta. Para ello utilizo <% %>
+			- Pruebo con la recuperación de los parámetros. -> Ok
+			- Sigo con el resto. Creada la inserción -> OK (Vuelve a la página de inserción)
+			
+			
+4. Creación de la pagina MostrarLibros.jsp
+	1. Crea un objeto conexión y un objeto sentencia. 
+	2. Crea una consulta SQL de selección para todos los libros de la tabla. 
+	3. Ejecuta la sentencia con su SQL. 
+	4. Devuelve un ResultSet con todos los registros. 
+	5. Recorre el ResultSet y lo imprime en html. 
+	6. Cierra los recursos (conexión ,sentencia, etc).	
+	
+5. Renombrar Formulario.html a jsp para que sea el formulario de alta y llamarlo desde la consulta
+			
+TODO
+------
+- Establecer usuario y contraseña de acceso a BBDD
+- Establecer PK en la tabla y constrains
