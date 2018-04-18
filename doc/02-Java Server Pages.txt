@@ -63,7 +63,7 @@ sqlite> insert into LIBRO(
 	5. Recorre el ResultSet y lo imprime en html. 
 	6. Cierra los recursos (conexión ,sentencia, etc).	
 	
-5. Renombrar Formulario.html a jsp para que sea el formulario de alta y llamarlo desde la consulta
+5. Renombrar Formulario.html a FormularioInsertarLibro.jsp" para que sea el formulario de alta y llamarlo desde la consulta
 			
 TODO
 ------
