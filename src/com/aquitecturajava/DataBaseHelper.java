@@ -26,8 +26,9 @@ public class DataBaseHelper<T> {
 			System.out.println("Antes de abrir la conexion");
 			//Crear la conexion
 			conn = DriverManager.getConnection(URL);
-			pstmt = conn.prepareStatement(consultaSQL);
+			
 			System.out.println("consultaSQL: " + consultaSQL);
+			pstmt = conn.prepareStatement(consultaSQL);
 			
 			filasAfectadas = pstmt.executeUpdate();
 			System.out.println("Ejecución correcta: " + filasAfectadas);		
@@ -59,7 +60,7 @@ public class DataBaseHelper<T> {
 	}
 	
 	@SuppressWarnings("unchecked")
-	public List<T> seleccionarRegistros(String consultaSQL, @SuppressWarnings("rawtypes") Class clase) {
+	public List<T> seleccionarRegistros(String consultaSQL, Class clase) {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;

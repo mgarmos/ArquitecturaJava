@@ -1,0 +1,16 @@
+Objetivos : 
+• Añadir la funcionalidad que nos permita borrar libros. 
+• Añadir funcionalidad que nos permita editar libros. 
+• Añadir un filtro por categorías a los libros. 
+Tareas: 
+1. Añadir un nuevo enlace de borrar a “MostrarLibros.jsp”
+2. Añadir el método borrar() a la clase Libro.
+	-> void borrar()
+3. Añadir una nueva página "BorrarLibro.jsp" que se encargue de ejecutar la funcionalidad de borrar. 
+4. Añadir un nuevo enlace de edición a MostrarLibros.jsp. 
+5. Añadir el método buscarPorClave() que busque un libro por ISBN a la clase Libro. 
+6. Añadir una nueva página (FormularioEditarLibro.jsp) que muestre los datos del libro que deseamos modificar. 
+7. Añadir el método salvar() a la clase libro que guarda las modificaciones realizadas. 
+8. Añadir una nueva pagina SalvarLibro.jsp que se encargue de ejecutar la funcionalidad de salvar 
+9. Añadir el método de buscarPorCategoria() a la clase Libro 
+10. Modificar la pagina MostrarLibros.jsp para que se apoye en el método buscarPorCategoria.

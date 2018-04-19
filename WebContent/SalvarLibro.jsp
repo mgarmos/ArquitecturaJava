@@ -10,7 +10,7 @@
 	String categoria = request.getParameter("categoria");
 	
 	Libro libro = new Libro(isbn, titulo, categoria);
-	libro.insertar();
+	libro.salvar();
 	
 	//Redirigir la página
 	response.sendRedirect("MostrarLibros.jsp");	

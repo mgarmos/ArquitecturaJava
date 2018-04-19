@@ -16,4 +16,5 @@ Tareas:
 
 - Añadir Filtro por categoría en el JSP <select>
 - Refactorización. Se crea una clase Libro sobre la que se van a delegar las consultas
-- Convertir la clase DataBaseHelper en genérica para que devuelva el tipo que recoge por parámetro, utilizando reflection
+- Convertir la clase DataBaseHelper en genérica para que devuelva el tipo que recoge por parámetro, utilizando reflection. -> SelecconarRegistros recibe como
+parámetro la clase que tiene que devolver: public List<T> seleccionarRegistros(String consultaSQL,Class clase)

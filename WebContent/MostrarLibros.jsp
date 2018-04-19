@@ -12,21 +12,45 @@
 <link rel="stylesheet" type="text/css" href="css/formato.css"></link>
 <script type="text/javascript" src="js/validacion.js"></script>
 </head>
-	<body>    
+	<body>
+	<form id="miformulario" action="MostrarLibros.jsp">
+		<select id="categoria" name="categoria">
+			<option value="">Seleccionar</option>
+<%
+	List<String> categorias = Libro.buscarTodasLasCategorias();
+		for(String categoria: categorias) {
+%> 
+			<option value="<%=categoria %>"><%=categoria %></option>
+<%
+		} 
+%>	
+	 </select>
+	 <input type="submit" value="Filtrar">
+	 <br></br>   
 <%
 
-	List<Libro> libros = Libro.buscarTodos();
+	String categoria = request.getParameter("categoria");
+	List<Libro> libros = null;
+
+	if (categoria != null && !categoria.equals("")) {
+		libros = Libro.buscarPorCategoria(categoria);
+	} else {
+		libros = Libro.buscarTodos();	
+	}
 	for(Libro libro: libros) {
 %>	
 			<%=libro.getIsbn() %>
 			<%=libro.getTitulo() %>
 			<%=libro.getCategoria() %>
-><br></br>
+			<a href="BorrarLibro.jsp?isbn=<%=libro.getIsbn()%>">Borrar</a>
+			<a href="FormularioEditarLibro.jsp?isbn=<%=libro.getIsbn()%>">Editar</a>
+<br></br>
 <%
-		}
-
+	}
 %>    
-	<a href="./FormularioInsertarLibro.jsp">Insertar Libro</a>  
+	</form> 
+	
+	<a href="./FormularioInsertarLibro.jsp">Insertar Libro</a> 
 	</body>
 </html>    
 

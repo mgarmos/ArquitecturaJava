@@ -6,3 +6,5 @@ p {
 	text-align:right;
 	width:300px;
 }
+
+input.readOnly { background: lightgrey; }

@@ -6,14 +6,12 @@
 <%
 
 	String isbn = request.getParameter("isbn");
-	String titulo = request.getParameter("titulo");
-	String categoria = request.getParameter("categoria");
 	
-	Libro libro = new Libro(isbn, titulo, categoria);
-	libro.insertar();
+	Libro libro = new Libro(isbn);
+	System.out.println("... borrando libro: " + libro.getIsbn());
+	libro.borrar();
 	
 	//Redirigir la página
 	response.sendRedirect("MostrarLibros.jsp");	
 %>    
-    
     
