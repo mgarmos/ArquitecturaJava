@@ -15,7 +15,7 @@ public class DataBaseHelper<T> {
 	private static final String URL = "jdbc:sqlite:D:\\Usuarios\\Magarami\\eclipse-workspace\\ArquitecturaJava\\BBDD\\arquitecturajava.db";
 	
 	
-	public int modificarRegistro(String consultaSQL) {
+	public int modificarRegistro(String consultaSQL) throws DataBaseException {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		int filasAfectadas = 0;
@@ -35,23 +35,21 @@ public class DataBaseHelper<T> {
 			
 		} catch (ClassNotFoundException e) {
 			System.out.println("No se ha encontrado el driver. " + e.getMessage());
-			e.printStackTrace();
+			throw new DataBaseException("No se ha encontrado el driver", e);
 			
 		} catch (SQLException sqlex) {
 			System.out.println("Error al acceder a BBDD. " + sqlex.getMessage() + ". Código de error: " + sqlex.getErrorCode());
-			sqlex.printStackTrace();
+			throw new DataBaseException("Error al acceder a BBDD", sqlex);
 			
 		} catch (Exception e) {
-			// TODO: handle exception
 			System.out.println(e.getMessage());
-			e.printStackTrace();
+			throw new DataBaseException("Error de SQL");
 			
 		} finally {
 			try {
 				pstmt.close();
 				conn.close();
 			} catch (SQLException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
@@ -60,7 +58,7 @@ public class DataBaseHelper<T> {
 	}
 	
 	@SuppressWarnings("unchecked")
-	public List<T> seleccionarRegistros(String consultaSQL, Class clase) {
+	public List<T> seleccionarRegistros(String consultaSQL, Class clase) throws DataBaseException {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -100,19 +98,18 @@ public class DataBaseHelper<T> {
 				}
 				//Se añade el objeto a la lista
 				resultado.add(objeto);
-				System.out.println("Se añade " + objeto);
 				
 			}
 
 		} catch (ClassNotFoundException e) {
 			System.out.println("No se ha encontrado el driver. " + e.getMessage());
-			e.printStackTrace();
+			throw new DataBaseException("No se ha encontrado el driver", e);
 		} catch (SQLException sqlex) {
 			System.out.println("Error al acceder a BBDD. " + sqlex.getMessage() + ". Código de error: " + sqlex.getErrorCode());
-			sqlex.printStackTrace();
+			throw new DataBaseException("Error al acceder a BBDD", sqlex);
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
-			e.printStackTrace();
+			throw new DataBaseException("Error de SQL", e);
 		} finally {
 			try {
 				rs.close();

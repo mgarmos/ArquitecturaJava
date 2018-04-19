@@ -1,0 +1,13 @@
+Problema:
+• Los errores no le llegan al usuario
+
+Objetivos: 
+• Simplificar el manejo de excepciones de la aplicación 
+Tareas: 
+1. Revisión de el flujo de excepciones y uso de la clausulas try/catch. 
+2. Manejo de la cláusula throw , throws y flujo de excepciones. 
+3. Creación y conversión de excepciones. 
+4. Anidamiento de excepciones. 
+5. Excepciones de Tipo RunTime. 
+6. Creación de una página jsp de error. 
+7. Modificación del fichero web.xml
