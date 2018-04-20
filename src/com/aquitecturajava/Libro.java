@@ -83,7 +83,6 @@ public class Libro {
 	}
 
 	public void borrar() {
-		System.out.println("Libro->borrar() - isbn: " + this.isbn);
 		String consultaSQL = "delete from Libro where isbn = '" + this.isbn + "'";
 		DataBaseHelper<Libro> helper = new DataBaseHelper<Libro>();
 		helper.modificarRegistro(consultaSQL);

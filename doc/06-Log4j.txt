@@ -24,3 +24,11 @@ Tareas:
 6. Integración de log4j en la aplicación.
 	- Instalar Log4j en lib.
 	- Añadir log4j.properties en la carpeta src (Para que se cargue en el claspath)
+	- 	Se establecen las propiedades
+		log4j.rootLogger = DEBUG, miappender
+		log4j.logger.milog = com.arquitecturajava.logs
+		log4j.appender.miappender=org.apache.log4j.ConsoleAppender
+		log4j.appender.miappender.layout=org.apache.log4j.PatternLayout
+		log4j.appender.miappender.layout.conversionPattern=%F->%M() - %m%n
+	- Modificarlas clases para que escriban en el log
+		* private static final Logger log = Logger.getLogger(DataBaseHelper.class.getPackage().getName());

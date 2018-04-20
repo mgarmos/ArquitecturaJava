@@ -9,10 +9,14 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.log4j.Logger;
+
 
 public class DataBaseHelper<T> {
 	private static final String DRIVER = "org.sqlite.JDBC";
 	private static final String URL = "jdbc:sqlite:D:\\Usuarios\\Magarami\\eclipse-workspace\\ArquitecturaJava\\BBDD\\arquitecturajava.db";
+	
+	private static final Logger log = Logger.getLogger(DataBaseHelper.class.getPackage().getName());
 	
 	
 	public int modificarRegistro(String consultaSQL) throws DataBaseException {
@@ -23,26 +27,26 @@ public class DataBaseHelper<T> {
 		try {
 			Class.forName(DRIVER);
 			
-			System.out.println("Antes de abrir la conexion");
+			log.info("Antes de abrir la conexion");
 			//Crear la conexion
 			conn = DriverManager.getConnection(URL);
 			
-			System.out.println("consultaSQL: " + consultaSQL);
+			log.info("consultaSQL: " + consultaSQL);
 			pstmt = conn.prepareStatement(consultaSQL);
 			
 			filasAfectadas = pstmt.executeUpdate();
-			System.out.println("Ejecución correcta: " + filasAfectadas);		
+			log.info("Ejecución correcta: " + filasAfectadas);		
 			
 		} catch (ClassNotFoundException e) {
-			System.out.println("No se ha encontrado el driver. " + e.getMessage());
+			log.error("No se ha encontrado el driver. " + e.getMessage());
 			throw new DataBaseException("No se ha encontrado el driver", e);
 			
 		} catch (SQLException sqlex) {
-			System.out.println("Error al acceder a BBDD. " + sqlex.getMessage() + ". Código de error: " + sqlex.getErrorCode());
+			log.error("Error al acceder a BBDD. " + sqlex.getMessage() + ". Código de error: " + sqlex.getErrorCode());
 			throw new DataBaseException("Error al acceder a BBDD", sqlex);
 			
 		} catch (Exception e) {
-			System.out.println(e.getMessage());
+			log.error(e.getMessage());
 			throw new DataBaseException("Error de SQL");
 			
 		} finally {
@@ -71,9 +75,9 @@ public class DataBaseHelper<T> {
 			//Crear la conexion
 			conn = DriverManager.getConnection(URL);
 			pstmt = conn.prepareStatement(consultaSQL);
-			System.out.println("seleccionarRegistros() - consultaSQL: " + consultaSQL);
+			log.info("consultaSQL: " + consultaSQL);
 			rs = pstmt.executeQuery();
-			System.out.println("seleccionarRegistros() - Ejecución correcta");
+			log.info("Ejecución correcta");
 			
 			while (rs.next()) {
 				//Tengo que instanciar un objeto (Class.forname()
@@ -102,13 +106,13 @@ public class DataBaseHelper<T> {
 			}
 
 		} catch (ClassNotFoundException e) {
-			System.out.println("No se ha encontrado el driver. " + e.getMessage());
+			log.error("No se ha encontrado el driver. " + e.getMessage());
 			throw new DataBaseException("No se ha encontrado el driver", e);
 		} catch (SQLException sqlex) {
-			System.out.println("Error al acceder a BBDD. " + sqlex.getMessage() + ". Código de error: " + sqlex.getErrorCode());
+			log.error("Error al acceder a BBDD. " + sqlex.getMessage() + ". Código de error: " + sqlex.getErrorCode());
 			throw new DataBaseException("Error al acceder a BBDD", sqlex);
 		} catch (Exception e) {
-			System.out.println(e.getMessage());
+			log.error(e.getMessage());
 			throw new DataBaseException("Error de SQL", e);
 		} finally {
 			try {
