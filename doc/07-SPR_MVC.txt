@@ -27,3 +27,11 @@ Sin embargo las páginas JSP comparten la responsabilidad de controlar a que cla
 
 2. Construcción de un servlet controlador
 Para solventar ls situación anterior se construye un sevlet [controladorLibros.java] encargado de la responsabilidad de control.
+
+3. Mapeo de Servlet (http://www.baeldung.com/register-servlet)
+	Mediante anotaciones (En vez de en web.xml):
+	@WebServlet(
+	  name = "AnnotationExample",
+	  description = "Controlador de Libros",
+	  urlPatterns = {"/ControladorLibros"}
+	)
