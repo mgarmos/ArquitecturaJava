@@ -1,0 +1,26 @@
+Objetivos: 
+• Introducción y manejo de log4j 
+• Actualización de la aplicación para que use log4j. 
+
+Tareas: 
+1. Instalación del api de log4j.
+	Copio log4j-1.2.17.jar en la carpeta lib
+2. Introducción del api de log4j.
+	• String : Clase del API de JSE que representa el concepto de mensaje (o cadena) a nivel del API de log4j. 
+	• Layout : Clase del API de log4j que se encarga de seleccionar el formato en el cuál los mensajes son impresos. 
+	• Appender: Clase del API de log4j que hace referencia al recurso en el cuál los mensajes de error han de ser escritos (Consola, Fichero,Base de Datos etc.). Se apoyará en la clase Layout para asignar un formato a los mensajes 
+	• Logger: Clase del API de log4j que se encarga de la gestión de los mensajes de error y los imprime al appender o appenders que se le hayan asignado, utilizando el formato que se defina en el Layout.
+3. Construcción de un ejemplo sencillo. 
+4. Mensajes de error y niveles.
+	Logger.fatal() Imprime información de errores que hacen fallar completamente a la aplicación. 
+	Logger.error() Imprime información sobre errores que ha generado la aplicación pero no son fatales. 
+	Logger.warn() Imprime información sobre situaciones atípicas en la aplicación. 
+	Logger.info() Imprime información sobre el flujo de la aplicación. 
+	Logger.debug() Almacena información importante a nivel de debug de la aplicación
+5. Manejo de Log
+4. properties.
+	Es el encargado de asignar los niveles de log ,appenders y layouts en una aplicación real de tal forma que esta configuración pueda ser modificada por un administrador sin tener que tocar el código de la aplicación.	
+	
+6. Integración de log4j en la aplicación.
+	- Instalar Log4j en lib.
+	- Añadir log4j.properties en la carpeta src (Para que se cargue en el claspath)

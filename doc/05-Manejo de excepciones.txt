@@ -9,5 +9,11 @@ Tareas:
 3. Creación y conversión de excepciones. 
 4. Anidamiento de excepciones. 
 5. Excepciones de Tipo RunTime. 
-6. Creación de una página jsp de error. 
+6. Creación de una página jsp de error.
+	Se crea Error.jsp -> <%@ page isErrorPage="true" %>
+	
 7. Modificación del fichero web.xml
+	<error-page>
+	<exception-type>java.lang.RuntimeException</exception-type>
+	<location>/Error.jsp</location>
+	</error-page>
