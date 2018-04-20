@@ -58,7 +58,8 @@ public class ControladorLibros extends HttpServlet {
 			request.setAttribute("listaDeCategorias", listaCategorias);
 			dispatcher = request.getRequestDispatcher("FormularioInsertarLibro.jsp");
 
-		} else if (request.getServletPath().equals("/insertarLibro.do")) {
+		//} else if (request.getServletPath().equals("/insertarLibro.do")) {
+		} else {
 			log.info("..doy de alta el libro desde el servlet");
 			String isbn = request.getParameter("isbn");
 			String titulo = request.getParameter("titulo");
