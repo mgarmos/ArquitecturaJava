@@ -1,0 +1,29 @@
+Objetivos
+	Aplicar el principio SRP a nuestra aplicación.
+Tareas:
+1. Responsabilidades de la aplicación y el principio SRP 
+2. Construcción de un servlet controlador 
+3. Mapeo de Servlet 
+4. Servlet Controlador y funcionalidad 
+5. Inserción en modelo MVC 
+6. Borrar en el modelo MVC 
+7. Editar en el modelo MVC 
+8. Filtrar en el modelo MVC
+
+-----
+Situación Actual
+• Paginas JSP : Se encargan de crear la capa de presentación 
+• Clases Java : Se encargan de crear la capa de negocio y persistencia
+
+Introducción del principio SRP.
+SRP (Simple Responsability Principle): toda clase o componente debe tener una única responsabilidad y todas sus funciones deben orientarse hacia ésta. ->Modularidad, máxima cohesión y mínimo acoplamiento.
+
+1. Responsabilidades de la aplicación y el principio SRP
+Si revisamos las responsabilidades nuestro código fuente, podremos encontrarnos con lo siguiente : 
+	1. Paginas JSP (Capa Presentación) : Responsabilidad de presentar información al usuario 
+	2. Clases Java (Capa de Persistencia) : Responsabilidad de persistir los datos en la base de datos.
+	
+Sin embargo las páginas JSP comparten la responsabilidad de controlar a que clase java y métodos se llama y de presentar los datos. Esta situación se hace más evidente en los JSP's InsertarLibro, BorrarLibro y SalvarLibro que no presentan datos. Están ejerciendo responsabilidades de CONTROL cuando sólo deberían ser responsables de la presentación de los datos.
+
+2. Construcción de un servlet controlador
+Para solventar ls situación anterior se construye un sevlet [controladorLibros.java] encargado de la responsabilidad de control.
