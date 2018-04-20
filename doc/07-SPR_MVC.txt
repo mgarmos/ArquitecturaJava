@@ -35,3 +35,12 @@ Para solventar ls situación anterior se construye un sevlet [controladorLibros.
 	  description = "Controlador de Libros",
 	  urlPatterns = {"/ControladorLibros"}
 	)
+	
+4. Servlet Controlador y funcionalidad
+	Se implementa el método doGet para que cuando se llame, cargue la lista de categorías de BBDD y redirija a MostrarLibros.jsp
+5. Inserción con modelo MVC
+En esta tarea vamos a modificar la aplicación para que tanto la parte de mostrar como la de insertar estén construidas sobre un modelo MVC. Para ello definiremos las siguientes tres URLs asociadas al controlador. 
+• MostrarLibros.do 
+• FormularioLibroInsertar.do 
+• InsertarLibro.do 
+Dependiendo de la URL que se solicite al Controlador por ejemplo ControladorLibros/MostrarLibros.do el controlador realizara una operación u otra.	

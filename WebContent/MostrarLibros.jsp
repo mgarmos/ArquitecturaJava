@@ -17,7 +17,7 @@
 		<select id="categoria" name="categoria">
 			<option value="">Seleccionar</option>
 <%
-	List<String> categorias = Libro.buscarTodasLasCategorias();
+	List<String> categorias = (List<String>)request.getAttribute("listaDeCategorias");
 		for(String categoria: categorias) {
 %> 
 			<option value="<%=categoria %>"><%=categoria %></option>
@@ -32,6 +32,7 @@
 	String categoria = request.getParameter("categoria");
 	List<Libro> libros = null;
 
+	
 	if (categoria != null && !categoria.equals("")) {
 		libros = Libro.buscarPorCategoria(categoria);
 	} else {
