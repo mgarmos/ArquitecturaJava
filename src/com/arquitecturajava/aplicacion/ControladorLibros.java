@@ -10,17 +10,15 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.log4j.Logger;
+
 import com.arquitecturajava.Libro;
 
 /**
  * Comunicación entre las distintas páginas
  *
  */
-@WebServlet(
-		name = "ControladorLibros", 
-		description = "Controlador de Libros", 
-		urlPatterns = { "/ControladorLibros" }
-		)
+@WebServlet(name = "ControladorLibros", description = "Controlador de Libros", urlPatterns = { "*.do" })
 public class ControladorLibros extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -35,21 +33,42 @@ public class ControladorLibros extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		final Logger log = Logger.getLogger(ControladorLibros.class.getPackage().getName());
 
 		RequestDispatcher dispatcher = null;
+		log.info("petición: " + request.getServletPath());
 
-		//delegan en la capa de persistencia y cargan la información que la página
-		List<String> listaCategorias = Libro.buscarTodasLasCategorias();
-		
-		//Por ahora se hace en el jsp hasta se solucione el if por categoria para devolver la lista de libros
-		//List<Libro> listaLibros = Libro.buscarTodos();		
+		if (request.getServletPath().equals("/MostrarLibros.do")) {
+			// delegan en la capa de persistencia y cargan la información que la página
+			List<String> listaCategorias = Libro.buscarTodasLasCategorias();
 
-		// Se pasa a la request
-		//request.setAttribute("listaDeLibros", listaLibros);
-		request.setAttribute("listaDeCategorias", listaCategorias);
+			// Por ahora se hace en el jsp hasta se solucione el if por categoria para
+			// devolver la lista de libros
+			// List<Libro> listaLibros = Libro.buscarTodos();
 
-		// Se redirige a MostrarLibros
-		dispatcher = request.getRequestDispatcher("MostrarLibros.jsp");
+			// Se pasa a la request
+			// request.setAttribute("listaDeLibros", listaLibros);
+			request.setAttribute("listaDeCategorias", listaCategorias);
+
+			// Se redirige a MostrarLibros
+			dispatcher = request.getRequestDispatcher("MostrarLibros.jsp");
+
+		} else if (request.getServletPath().equals("/FormularioInsertarLibro.do")) {
+			List<String> listaCategorias = Libro.buscarTodasLasCategorias();
+			request.setAttribute("listaDeCategorias", listaCategorias);
+			dispatcher = request.getRequestDispatcher("FormularioInsertarLibro.jsp");
+
+		} else if (request.getServletPath().equals("/insertarLibro.do")) {
+			log.info("..doy de alta el libro desde el servlet");
+			String isbn = request.getParameter("isbn");
+			String titulo = request.getParameter("titulo");
+			String categoria = request.getParameter("categoria");
+			Libro libro = new Libro(isbn, titulo, categoria);
+			libro.insertar();
+			dispatcher = request.getRequestDispatcher("MostrarLibros.do");
+		}
+
 		dispatcher.forward(request, response);
+
 	}
 }

@@ -51,7 +51,7 @@
 %>    
 	</form> 
 	
-	<a href="./FormularioInsertarLibro.jsp">Insertar Libro</a> 
+	<a href="./FormularioInsertarLibro.do">Insertar Libro</a> 
 	</body>
 </html>    
 

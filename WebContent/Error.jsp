@@ -7,7 +7,7 @@
 </head>
 <body>
 Excepción: <%=exception%><br>
-Excepción: <%=exception.printStackTrace()%>
+
 
 </body>
 </html>

@@ -12,7 +12,7 @@
 <script type="text/javascript" src="js/validacion.js"></script>
 </head>
 <body>
-<form id="miformulario" action="InsertarLibro.jsp" onsubmit="return validacion();">
+<form id="miformulario" action="insertarLibro.do" onsubmit="return validacion();">
 	<fieldset>
 		<legend>Formulario alta libro</legend>
 		<p>
