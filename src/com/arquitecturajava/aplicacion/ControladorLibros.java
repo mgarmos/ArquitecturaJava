@@ -60,7 +60,7 @@ public class ControladorLibros extends HttpServlet {
 			dispatcher = request.getRequestDispatcher("FormularioInsertarLibro.jsp");
 			dispatcher.forward(request, response);
 
-		} else if (request.getServletPath().equals("/insertarLibro.do")) {
+		}  else if (request.getServletPath().equals("/insertarLibro.do")) {
 			log.info("..doy de alta el libro desde el servlet");
 			String isbn = request.getParameter("isbn");
 			String titulo = request.getParameter("titulo");
@@ -68,6 +68,13 @@ public class ControladorLibros extends HttpServlet {
 			Libro libro = new Libro(isbn, titulo, categoria);
 			libro.insertar();
 			//dispatcher = request.getRequestDispatcher("MostrarLibros.do");
+			response.sendRedirect("MostrarLibros.do");
+			
+		} else if (request.getServletPath().equals("/BorrarLibro.do")) {
+			String isbn = request.getParameter("isbn");
+			Libro libro = new Libro(isbn);
+			log.info("... borrando libro: " + libro.getIsbn());
+			libro.borrar();
 			response.sendRedirect("MostrarLibros.do");
 		}
 

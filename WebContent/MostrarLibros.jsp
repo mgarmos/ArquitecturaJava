@@ -21,7 +21,7 @@
 		for(String categoria: categorias) {
 %> 
 			<option value="<%=categoria %>"><%=categoria %></option>
-<%
+<% 
 		} 
 %>	
 	 </select>
@@ -43,7 +43,7 @@
 			<%=libro.getIsbn() %>
 			<%=libro.getTitulo() %>
 			<%=libro.getCategoria() %>
-			<a href="BorrarLibro.jsp?isbn=<%=libro.getIsbn()%>">Borrar</a>
+			<a href="BorrarLibro.do?isbn=<%=libro.getIsbn()%>">Borrar</a>
 			<a href="FormularioEditarLibro.jsp?isbn=<%=libro.getIsbn()%>">Editar</a>
 <br></br>
 <%
