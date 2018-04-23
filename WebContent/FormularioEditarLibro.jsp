@@ -6,11 +6,7 @@
 <%@ page import="com.arquitecturajava.Libro"%>
 
 <% 
-	DataBaseHelper<Libro> helper = new DataBaseHelper<Libro>();
-	String isbn = request.getParameter("isbn");
-	Libro libro = new Libro(isbn);
-	libro = libro.buscarPorClave();
-	System.out.println("Libro en jsp: " + libro);
+	Libro libro = (Libro)request.getAttribute("libro");
 %>
 <html>
 <head>
@@ -19,7 +15,7 @@
 <script type="text/javascript" src="js/validacion.js"></script>
 </head>
 <body>
-<form id="miformulario" action="SalvarLibro.jsp" onsubmit="return validacion();">
+<form id="miformulario" action="SalvarLibro.do" onsubmit="return validacion();">
 	<fieldset>
 		<legend>Formulario editar libro</legend>
 		<p>
@@ -36,7 +32,7 @@
 			
 <%
 
-	List<String> categorias = Libro.buscarTodasLasCategorias();
+	List<String> categorias = Libro.buscarTodasLasCategorias();	
 		for(String categoria: categorias) {
 			if (libro.getCategoria().equals(categoria)) {
 %>

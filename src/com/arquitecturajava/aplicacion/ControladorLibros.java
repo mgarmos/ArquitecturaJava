@@ -60,7 +60,23 @@ public class ControladorLibros extends HttpServlet {
 			dispatcher = request.getRequestDispatcher("FormularioInsertarLibro.jsp");
 			dispatcher.forward(request, response);
 
-		}  else if (request.getServletPath().equals("/insertarLibro.do")) {
+		}  else if (request.getServletPath().equals("/FormularioEditarLibro.do")) {
+			
+			//Buscar libro por clave
+			String isbn = request.getParameter("isbn");
+			Libro libro = new Libro(isbn);
+			libro = libro.buscarPorClave();
+			request.setAttribute("libro", libro);
+			
+			//Cargar categorias
+			List<String> categorias = Libro.buscarTodasLasCategorias();
+			List<String> listaCategorias = Libro.buscarTodasLasCategorias();
+			request.setAttribute("listaDeCategorias", listaCategorias);
+			
+			dispatcher = request.getRequestDispatcher("FormularioEditarLibro.jsp");
+			dispatcher.forward(request, response);
+
+		} else if (request.getServletPath().equals("/insertarLibro.do")) {
 			log.info("..doy de alta el libro desde el servlet");
 			String isbn = request.getParameter("isbn");
 			String titulo = request.getParameter("titulo");
@@ -76,9 +92,15 @@ public class ControladorLibros extends HttpServlet {
 			log.info("... borrando libro: " + libro.getIsbn());
 			libro.borrar();
 			response.sendRedirect("MostrarLibros.do");
-		}
-
-		
-
+			
+		}  else if (request.getServletPath().equals("/SalvarLibro.do")) {
+			String isbn = request.getParameter("isbn");
+			String titulo = request.getParameter("titulo");
+			String categoria = request.getParameter("categoria");
+			
+			Libro libro = new Libro(isbn, titulo, categoria); 
+			libro.salvar();
+			response.sendRedirect("MostrarLibros.do");
+		}	
 	}
 }
