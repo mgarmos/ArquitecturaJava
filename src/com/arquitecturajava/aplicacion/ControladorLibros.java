@@ -52,24 +52,26 @@ public class ControladorLibros extends HttpServlet {
 
 			// Se redirige a MostrarLibros
 			dispatcher = request.getRequestDispatcher("MostrarLibros.jsp");
+			dispatcher.forward(request, response);
 
 		} else if (request.getServletPath().equals("/FormularioInsertarLibro.do")) {
 			List<String> listaCategorias = Libro.buscarTodasLasCategorias();
 			request.setAttribute("listaDeCategorias", listaCategorias);
 			dispatcher = request.getRequestDispatcher("FormularioInsertarLibro.jsp");
+			dispatcher.forward(request, response);
 
-		//} else if (request.getServletPath().equals("/insertarLibro.do")) {
-		} else {
+		} else if (request.getServletPath().equals("/insertarLibro.do")) {
 			log.info("..doy de alta el libro desde el servlet");
 			String isbn = request.getParameter("isbn");
 			String titulo = request.getParameter("titulo");
 			String categoria = request.getParameter("categoria");
 			Libro libro = new Libro(isbn, titulo, categoria);
 			libro.insertar();
-			dispatcher = request.getRequestDispatcher("MostrarLibros.do");
+			//dispatcher = request.getRequestDispatcher("MostrarLibros.do");
+			response.sendRedirect("MostrarLibros.do");
 		}
 
-		dispatcher.forward(request, response);
+		
 
 	}
 }
