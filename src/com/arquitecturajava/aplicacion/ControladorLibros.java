@@ -41,18 +41,16 @@ public class ControladorLibros extends HttpServlet {
 		if (request.getServletPath().equals("/MostrarLibros.do")) {
 			// delegan en la capa de persistencia y cargan la información que la página
 			List<String> listaCategorias = Libro.buscarTodasLasCategorias();
-			
+
 			String categoria = request.getParameter("categoria");
 			List<Libro> libros = null;
 
-			
 			if (categoria != null && !categoria.equals("")) {
 				libros = Libro.buscarPorCategoria(categoria);
 			} else {
-				libros = Libro.buscarTodos();	
+				libros = Libro.buscarTodos();
 			}
 			request.setAttribute("libros", libros);
-			
 
 			// Por ahora se hace en el jsp hasta se solucione el if por categoria para
 			// devolver la lista de libros
@@ -72,19 +70,17 @@ public class ControladorLibros extends HttpServlet {
 			dispatcher = request.getRequestDispatcher("FormularioInsertarLibro.jsp");
 			dispatcher.forward(request, response);
 
-		}  else if (request.getServletPath().equals("/FormularioEditarLibro.do")) {
-			
-			//Buscar libro por clave
+		} else if (request.getServletPath().equals("/FormularioEditarLibro.do")) {
+
+			// Buscar libro por clave
 			String isbn = request.getParameter("isbn");
-			Libro libro = new Libro(isbn);
-			libro = libro.buscarPorClave();
+			Libro libro = Libro.buscarPorClave(isbn);
 			request.setAttribute("libro", libro);
-			
-			//Cargar categorias
-			List<String> categorias = Libro.buscarTodasLasCategorias();
+
+			// Cargar categorias
 			List<String> listaCategorias = Libro.buscarTodasLasCategorias();
 			request.setAttribute("listaDeCategorias", listaCategorias);
-			
+
 			dispatcher = request.getRequestDispatcher("FormularioEditarLibro.jsp");
 			dispatcher.forward(request, response);
 
@@ -95,24 +91,24 @@ public class ControladorLibros extends HttpServlet {
 			String categoria = request.getParameter("categoria");
 			Libro libro = new Libro(isbn, titulo, categoria);
 			libro.insertar();
-			//dispatcher = request.getRequestDispatcher("MostrarLibros.do");
+			// dispatcher = request.getRequestDispatcher("MostrarLibros.do");
 			response.sendRedirect("MostrarLibros.do");
-			
+
 		} else if (request.getServletPath().equals("/BorrarLibro.do")) {
 			String isbn = request.getParameter("isbn");
 			Libro libro = new Libro(isbn);
 			log.info("... borrando libro: " + libro.getIsbn());
 			libro.borrar();
 			response.sendRedirect("MostrarLibros.do");
-			
-		}  else if (request.getServletPath().equals("/SalvarLibro.do")) {
+
+		} else if (request.getServletPath().equals("/SalvarLibro.do")) {
 			String isbn = request.getParameter("isbn");
 			String titulo = request.getParameter("titulo");
 			String categoria = request.getParameter("categoria");
-			
-			Libro libro = new Libro(isbn, titulo, categoria); 
+
+			Libro libro = new Libro(isbn, titulo, categoria);
 			libro.salvar();
 			response.sendRedirect("MostrarLibros.do");
-		}	
+		}
 	}
 }

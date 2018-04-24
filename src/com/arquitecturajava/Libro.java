@@ -49,8 +49,8 @@ public class Libro {
 		this.categoria = categoria;
 	}
 
-	public Libro buscarPorClave() {
-		String consultaSQL = "Select * from LIBRO where isbn = '" + this.isbn + "'";
+	public static Libro buscarPorClave(String isbn) {
+		String consultaSQL = "Select * from LIBRO where isbn = '" + isbn + "'";
 		DataBaseHelper<Libro> helper = new DataBaseHelper<Libro>();
 		List<Libro> resultado = helper.seleccionarRegistros(consultaSQL, Libro.class);
 		return resultado.get(0);

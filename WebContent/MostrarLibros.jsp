@@ -17,9 +17,6 @@
 		<select id="categoria" name="categoria">
 			<option value="">Seleccionar</option>
 <%
-	System.out.println("listaDeCategorias: " + request.getAttribute("listaDeCategorias"));
-	System.out.println("listaDeCategorias: " + request.getAttribute("listaDeCategorias"));
-
 	List<String> categorias = (List<String>)request.getAttribute("listaDeCategorias");
 		for(String categoria: categorias) {
 %> 
