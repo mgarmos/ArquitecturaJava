@@ -43,4 +43,8 @@ En esta tarea vamos a modificar la aplicación para que tanto la parte de mostra
 • MostrarLibros.do 
 • FormularioLibroInsertar.do 
 • InsertarLibro.do 
-Dependiendo de la URL que se solicite al Controlador por ejemplo ControladorLibros/MostrarLibros.do el controlador realizara una operación u otra.	
+Dependiendo de la URL que se solicite al Controlador por ejemplo ControladorLibros/MostrarLibros.do el controlador realizara una operación u otra.
+
+
+NOTAS:
+Para que funcione, he tenido que hacer response.sendRedirect() en algunas acciones --> Repasar
