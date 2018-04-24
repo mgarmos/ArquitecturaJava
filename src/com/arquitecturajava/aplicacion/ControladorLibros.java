@@ -41,6 +41,18 @@ public class ControladorLibros extends HttpServlet {
 		if (request.getServletPath().equals("/MostrarLibros.do")) {
 			// delegan en la capa de persistencia y cargan la información que la página
 			List<String> listaCategorias = Libro.buscarTodasLasCategorias();
+			
+			String categoria = request.getParameter("categoria");
+			List<Libro> libros = null;
+
+			
+			if (categoria != null && !categoria.equals("")) {
+				libros = Libro.buscarPorCategoria(categoria);
+			} else {
+				libros = Libro.buscarTodos();	
+			}
+			request.setAttribute("libros", libros);
+			
 
 			// Por ahora se hace en el jsp hasta se solucione el if por categoria para
 			// devolver la lista de libros

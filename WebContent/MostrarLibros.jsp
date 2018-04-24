@@ -13,10 +13,13 @@
 <script type="text/javascript" src="js/validacion.js"></script>
 </head>
 	<body>
-	<form id="miformulario" action="MostrarLibros.jsp">
+	<form id="miformulario" action="MostrarLibros.do">
 		<select id="categoria" name="categoria">
 			<option value="">Seleccionar</option>
 <%
+	System.out.println("listaDeCategorias: " + request.getAttribute("listaDeCategorias"));
+	System.out.println("listaDeCategorias: " + request.getAttribute("listaDeCategorias"));
+
 	List<String> categorias = (List<String>)request.getAttribute("listaDeCategorias");
 		for(String categoria: categorias) {
 %> 
@@ -28,16 +31,7 @@
 	 <input type="submit" value="Filtrar">
 	 <br></br>   
 <%
-
-	String categoria = request.getParameter("categoria");
-	List<Libro> libros = null;
-
-	
-	if (categoria != null && !categoria.equals("")) {
-		libros = Libro.buscarPorCategoria(categoria);
-	} else {
-		libros = Libro.buscarTodos();	
-	}
+	List<Libro> libros = (List<Libro>)request.getAttribute("libros");
 	for(Libro libro: libros) {
 %>	
 			<%=libro.getIsbn() %>
