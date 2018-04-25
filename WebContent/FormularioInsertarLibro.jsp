@@ -1,9 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<%@ page import="java.util.List"%>
-<%@ page import="com.arquitecturajava.Libro"%>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <html>
 <head>
@@ -26,15 +24,10 @@
 		<p>
 			<label for="categoria">Categoría:</label>
 			<select id="categoria" name="categoria">
-			
-<%
-
-	List<String> categorias = Libro.buscarTodasLasCategorias();
-		for(String categoria: categorias) {
-%>	
-			<option value="<%=categoria %>"><%=categoria %></option>	
-<% 		} %>	
-			</select> 
+				<c:forEach var="categoria" items="${listaDeCategorias}">
+					<option value="${categoria}" >${categoria}</option>
+				</c:forEach>
+			</select>  
 		</p>		
 		
 	</fieldset>

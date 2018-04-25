@@ -1,8 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     
+ <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
+   
+    
 <%@ page import="java.util.List"%>
-<%@ page import="com.arquitecturajava.Libro"%>
+<%@ page import="com.arquitecturajava.Libro"%> 
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -16,30 +19,19 @@
 	<form id="miformulario" action="MostrarLibros.do">
 		<select id="categoria" name="categoria">
 			<option value="">Seleccionar</option>
-<%
-	List<String> categorias = (List<String>)request.getAttribute("listaDeCategorias");
-		for(String categoria: categorias) {
-%> 
-			<option value="<%=categoria %>"><%=categoria %></option>
-<% 
-		} 
-%>	
-	 </select>
+			<c:forEach var="categoria" items="${listaDeCategorias}">
+				<option value="${categoria}">${categoria}</option>
+			</c:forEach>
+	 	</select>
 	 <input type="submit" value="Filtrar">
-	 <br></br>   
-<%
-	List<Libro> libros = (List<Libro>)request.getAttribute("libros");
-	for(Libro libro: libros) {
-%>	
-			<%=libro.getIsbn() %>
-			<%=libro.getTitulo() %>
-			<%=libro.getCategoria() %>
-			<a href="BorrarLibro.do?isbn=<%=libro.getIsbn()%>">Borrar</a>
-			<a href="FormularioEditarLibro.do?isbn=<%=libro.getIsbn()%>">Editar</a>
-<br></br>
-<%
-	}
-%>    
+	 <br></br>
+	 
+	 <c:forEach var="libro" items="${libros}">
+	 	${libro.isbn} - ${libro.titulo} - ${libro.categoria} ->
+	 	<a href="BorrarLibro.do?isbn=${libro.isbn}">Borrar</a>
+	 	<a href="FormularioEditarLibro.do?isbn=${libro.isbn}">Editar</a>
+	 	<br></br>
+	 </c:forEach>   
 	</form> 
 	
 	<a href="./FormularioInsertarLibro.do">Insertar Libro</a> 

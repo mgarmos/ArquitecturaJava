@@ -1,0 +1,27 @@
+Objetivos: 
+• Utilizar JSTL en la aplicación 
+Tareas: 
+1. Instalación de JSTL
+	Buscar JSTL -> https://tomcat.apache.org/taglibs/standard/ 
+	Descargar: taglibs-standard-compat-1.2.5.jar
+	
+	
+2. Introducción a JSTL 
+3. Etiquetas Básicas JSTL
+	${variable}
+	
+	<c:forEach var="objeto" items="${lista}">
+		${objeto.propiedad}
+	</c:forEach>
+	
+	<c:if test=”${edad>30}”>
+		Eres una persona adulta ${edad}
+	</c:if>	
+
+4. Modificar MostrarLibro.jsp 
+5. Modificar FormularioInsertarLibro.jsp 
+6. Modificar FormularioEditarLibro.jsp
+
+-----
+
+

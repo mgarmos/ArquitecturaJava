@@ -3,12 +3,8 @@
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<%@ page import="java.util.List"%>
-<%@ page import="com.arquitecturajava.Libro"%>
 
-<% 
-	Libro libro = (Libro)request.getAttribute("libro");
-%>
+
 <html>
 <head>
 <title>Formulario Libro</title>
@@ -21,33 +17,25 @@
 		<legend>Formulario editar libro</legend>
 		<p>
 			<label for="isbn">ISBN:</label>
-			<input id= "isbn" type="text" name="isbn" class="readOnly" value="<%=libro.getIsbn()%>" readonly="readonly"></input>
+			<input id= "isbn" type="text" name="isbn" class="readOnly" value="${libro.isbn}" readonly="readonly"></input>
 		</p>
 		<p>
 			<label for="titulo">Título:</label>
-			<input id= "titulo" type="text" name="titulo" value="<%=libro.getTitulo()%>"></input>
+			<input id= "titulo" type="text" name="titulo" value="${libro.titulo}"></input>
 		</p>
 		<p>
 			<label for="categoria">Categoría:</label>
 			<select id="categoria" name="categoria">
-				
-			
-<%
-
-	List<String> categorias = (List<String>)request.getAttribute("listaDeCategorias");	
-		for(String categoria: categorias) {
-			if (libro.getCategoria().equals(categoria)) {
-%>
-			<option value="<%=categoria %>" selected="selected"><%=categoria %></option>	
-<%				
-			} else {
-%>	
-			<option value="<%=categoria %>"><%=categoria %></option>	
-<%
-			}
-		}
-
-%>	
+				<c:forEach var="categoria" items="${listaDeCategorias}">
+					<c:choose>
+						<c:when test="${categoria==libro.categoria}">
+							<option value="${categoria}" selected="selected">${categoria}</option>
+						</c:when>
+						<c:otherwise>
+							<option value="${categoria}" >${categoria}</option>
+						</c:otherwise>
+					</c:choose>
+				</c:forEach>
 			</select> 
 		</p>		
 		
