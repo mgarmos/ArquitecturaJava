@@ -20,5 +20,6 @@ Tareas
 3. Creación de una accion principal
 	Creación de la clase abstracta: Accion, que definira el método ejecutar(HttpServletRequest request, HttpServletResponse response). Será la clase que instancie el controlador, y llamará a su método ejecutar()
 4. Crear una jerarquia de acciones
-	Para cada if que no sea llamar al formulario, se crea una acción que herede de Accion
+	Para cada if  se crea una acción que herede de Accion y que implmente en el metodo ejecutar el código que estaba en el Controlador.
+	Se delega la responsabilidad de qué Acción crear dependiendo de la petición, en la clase Accion mediante el método getAccion(). Se utiliza el patrón Factory
 5. Api de reflection y principio OCP
