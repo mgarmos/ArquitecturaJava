@@ -31,5 +31,6 @@ public class MostrarLibrosAccion extends Accion {
 		// Se redirige a MostrarLibros
 		RequestDispatcher dispatcher = request.getRequestDispatcher("MostrarLibros.jsp");
 		dispatcher.forward(request, response);
+
 	}
 }
