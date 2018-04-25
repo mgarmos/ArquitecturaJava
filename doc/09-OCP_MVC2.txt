@@ -1,0 +1,24 @@
+OCP (Open Closed Principle):
+El principio OCP o principio de apertura y cierre, se define como: todo código desarrollado para una aplicación debe estar cerrado a las modificaciones y abierto a la extensibilidad.
+Expresado de otra manera: debemos poder añadir nueva funcionalidad a la aplicación sin tener que alterar el código ya construido.
+
+Objetivos 
+ • Aplicar el principio OCP a nuestra aplicación
+ 
+Tareas 
+1. El principio OCP y el Controlador
+	Cada vez que añadimos una mínima funcionalidad nueva a nuestra aplicación estamos obligados a modificar el Servlet controlador de esta y añadir una o varias sentencias if –else if que implementen la nueva funcionalidad: cualquier modificación por pequeña que sea de la aplicación afecta directamente al controlador y clarifica que no cumple con el principio OCP.
+
+2. El principio OCP y el patron Command
+	Para rediseñar el controlador y que pueda cumplir con el principio OCP vamos extraer el concepto de Acción/Tarea del mismo y ubicarlo en una jerarquía de clases completamente nueva . Cada una de estas clases tendrá las siguientes características: 
+	1. Heredarán de una clase común denominada Acción. 
+	2. Todas dispondrán del método ejecutar en el cual ejecutaran la funcionalidad a ellas asignada. 
+	3. Tendrán un nombre que haga referencia a la funcionalidad que se encargan de ejecutar.
+
+	
+	
+3. Creación de una accion principal
+	Creación de la clase abstracta: Accion, que definira el método ejecutar(HttpServletRequest request, HttpServletResponse response). Será la clase que instancie el controlador, y llamará a su método ejecutar()
+4. Crear una jerarquia de acciones
+	Para cada if que no sea llamar al formulario, se crea una acción que herede de Accion
+5. Api de reflection y principio OCP
