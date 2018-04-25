@@ -1,0 +1,76 @@
+A partir de este capítulo comienza la segunda parte del libro orientada a la utilización de distintos frameworks que nos serán útiles para acelerar el desarrollo. En este capítulo introduciremos Hibernate como framework de persistencia y substituiremos la capa de persistencia actual (DataBaseHelper.java) por Hibernate.
+
+Objetivos : 
+• Introducción a Hibernate
+• Utilizar Hibernate en nuestra aplicación 
+
+Tareas : 
+1. Concepto de Framework de persistencia.
+	Limitaciones actuales del modelo de acceso a BBDD:
+	• No soporta transacciones que agrupen varios métodos ya que la conexión no es compartida y cada método es totalmente independiente. 
+	• No soporta uso de pool de conexiones y cada vez se construye una conexión nueva 
+	• No soporta consultas preparadas y usa consultas SQL estándar con los problemas de inyección de SQL que ésto genera 
+	• No soporta varios tipos de motores de bases de datos y se centra en SQLite
+	
+	Para evolucionar nuestra solución a algo mas serio, deberemos apoyarnos en un framework de persistencia que elimine las limitaciones que nuestra clase actual tiene y aporte características adicionales:
+	• Transacciones
+	• Lenguaje de consultas
+	• Caches
+	• Pool de conexiones
+	• Consultas preparadas
+	• Mapeos
+2. Instalación de Hibernate.
+	- Descargar hibernate3.jar en el lib
+	- Creo clase Prueba para probar Inserción -> java.lang.ClassNotFoundException: org.dom4j.DocumentException
+	- Busco el jar que contiene -> dom4j-1.6.1.jar -> Copio al lib
+	- -> java.lang.ClassNotFoundException: org.apache.commons.logging.LogFactory -> org-apache-commons-logging.jar
+	- -> org.hibernate.HibernateException: /hibernate.cfg.xml not found -> Ok. Creo hibernate.cfg.xml (vacío) en src (Accesible desde el classpath)
+	- -> org.hibernate.HibernateException: Could not parse configuration: /hibernate.cfg.xml (No puede parsear el fichero-> Lo relleno)
+		 Error parsing XML: /hibernate.cfg.xml(2) El documento no es válido: no se ha encontrado la gramática.
+		 Error parsing XML: /hibernate.cfg.xml(2) El elemento raíz del documento "hibernate-configuration", debe coincidir con la raíz DOCTYPE "null".
+			<?xml version='1.0' encoding='utf-8'?>
+			<hibernate-configuration>
+			....
+			</hibernate-configuration>
+			Error en la cabecera del fichero xml -> Busco la cabecera adecuada
+	- -> org.hibernate.HibernateException: JDBC Driver class not found: com.mysql.jdbc.Driver (Está buscando el driver de mySql -> Configuro para SQLite)
+	- -> org.hibernate.HibernateException: Hibernate Dialect must be explicitly set (Configuro la URL de acceso a BBDD)
+	- -> org.hibernate.HibernateException: Hibernate Dialect must be explicitly set for database: SQLite --> Añado 
+				<property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
+	- -> java.lang.NoClassDefFoundError: org/apache/commons/collections/LRUMap ->  commons-collections-3.2.2.jar
+	- -> java.lang.ClassNotFoundException: javax.transaction.Synchronization -> jta-1.1.jar
+	- -> org.hibernate.MappingException: Unknown entity: com.arquitecturajava.Libro (No ha encontrado la clase contra la que mapear la tabla Libro) -> Creo la propiedad que lo mapea -> <mapping resource="com/arquitecturajava/aplicacion/bo/Libro.xml"/>
+	- -> org.hibernate.MappingNotFoundException: resource: com/arquitecturajava/Libro.xml not found (No encuentra el fichero de mapeo. Creo Libro.xml)
+	- -> No encuentra el DTD -> Cambio la cabecera:
+		<?xml version="1.0"?>
+			<!DOCTYPE hibernate-mapping PUBLIC 
+			"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+			"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+	- -> java.lang.ClassNotFoundException: net.sf.cglib.proxy.CallbackFilter -> cglib-2.2.2.jar
+	- -> java.lang.ClassNotFoundException: org.objectweb.asm.Type -> asm-3.3.1.jar
+	- -> ... Y por fin ha hecho la inserción - Ja, Ja, Ja
+	
+3. Introducción a Hibernate
+	Hibernate es un framework ORM (Object Relational Mapping) cuya tarea es la de permitir a un desarrollador mapear objetos contra registros de una base de datos (ver imagen). Arquitectura Java 156 Todos los frameworks de persistencia trabajan de forma similar, pero cada uno tiene sus propios ficheros de configuración. En el caso del framework Hibernate existen una serie de ficheros y conceptos claves a la hora de comenzar a trabajar con él. Los enumeramos a continuación basándonos en la clase Libro. 
+	• Hibernate.cfg.xml: Es el fichero principal de configuración del framework, es donde se configura el driver JDBC de acceso a datos la Ip del servidor de base de datos, el usuario y la password ,así como los ficheros de mapeo que van a utilizar las distintas clases. 
+	• Libro.xml: Es el fichero de mapeo que almacena la información relevante referida a cómo un objeto que pertenece a una clase determinada, en este caso un Libro, es mapeado a una fila de la tabla Libros 
+	• Libro.java : Clase java que es mapeada
+
+	Pasos: 
+	1. Leer Hibernate.cfg.xml: Como primera tarea, el framework busca y lee el fichero de configuración donde se encuentra la información de usuario, clave, driver y url de conexión. De esta forma se conecta a la base de datos. Junto a esta información se encuentra también la lista de ficheros de mapeo que leerá posteriormente. 
+	2. Leer Fichero de mapeo: Se encarga de leer todos los ficheros de mapeo de la aplicación para saber como mapear un objeto determinado contra alguna de las tablas existentes en la base de datos. 
+	3. Carga la clase : El programa que estemos construyendo carga las clases en memoria
+	4. Crear Objeto : El programa que estemos construyendo crea varios objetos de la clase 
+	5. Salvar: Hibernate se encarga de guardar los datos en la base de datos
+	 
+4. Configuración de Hibernate
+	- Configurar el fichero hibernate.cfg.xml y que se tenga acceso desde el classpath
+	
+5. Insertar objetos en la base de datos con Hibernate. 
+6. Selección de objetos de la base de datos con Hibernate. 
+7. Seleccionar un único objeto con Hibernate 
+8. Borrar objetos de la base de datos con Hibernate. 
+9. Filtrar objetos de la base de datos con Hibernate 
+10. Construcción de la clase Hibernate Helper. 
+11. Mapeo del fichero de configuración. 
+12. El principio de Convención sobre configuración
