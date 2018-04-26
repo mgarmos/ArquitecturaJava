@@ -10,8 +10,15 @@
 		<property name="connection.driver_class">org.sqlite.JDBC</property>
 		<property name="connection.url">jdbc:sqlite:D:\\Usuarios\\Magarami\\eclipse-workspace\\ArquitecturaJava\\BBDD\\arquitecturajava.db</property>
 		
+		<!--  Log -->
 		<property name="show_sql">true</property>
 		
+		<!--  Pool (Para sqlite)-->
+		<property name="connection.pool_size">1</property>
+		
+		<!--  autocommit 
+		<property name="hibernate.connection.autocommit">true</property>
+		-->
 		
 		<!--  Mapping -->
 		<mapping resource="com/arquitecturajava/Libro.xml"/>

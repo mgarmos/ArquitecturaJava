@@ -1,9 +1,14 @@
 package com.arquitecturajava;
 
-import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.log4j.Logger;
+import org.hibernate.Query;
+import org.hibernate.Session;
+import org.hibernate.Transaction;
+
 public class Libro {
+	private static final Logger log = Logger.getLogger(Libro.class.getPackage().getName());
 
 	public Libro() {
 	}
@@ -50,58 +55,81 @@ public class Libro {
 	}
 
 	public static Libro buscarPorClave(String isbn) {
-		String consultaSQL = "Select * from LIBRO where isbn = '" + isbn + "'";
-		DataBaseHelper<Libro> helper = new DataBaseHelper<Libro>();
-		List<Libro> resultado = helper.seleccionarRegistros(consultaSQL, Libro.class);
-		return resultado.get(0);
-	}
-
-	public static List<String> buscarTodasLasCategorias() {
-		String consultaSQL = "Select distinct categoria from LIBRO";
-		DataBaseHelper<String> helper = new DataBaseHelper<String>();
-		List<String> resultado = helper.seleccionarRegistros(consultaSQL, String.class);
-		return resultado;
-	}
-
-	public static List<Libro> buscarTodos() {
-		List<Libro> resultado = new ArrayList<Libro>();
-		String consultaSQL = "Select * from LIBRO";
-		DataBaseHelper<Libro> helper = new DataBaseHelper<Libro>();
-		resultado = helper.seleccionarRegistros(consultaSQL, Libro.class);
-		return resultado;
-	}
-
-	public void insertar() {
-
-		String consultaSQL = "insert into Libro (isbn,titulo,categoria) values";
-
-		// TODO SQLInyection
-		consultaSQL += "('" + this.isbn + "','" + this.titulo + "','" + this.categoria + "')";
-
-		DataBaseHelper<Libro> helper = new DataBaseHelper<Libro>();
-		helper.modificarRegistro(consultaSQL);
-	}
-
-	public void borrar() {
-		String consultaSQL = "delete from Libro where isbn = '" + this.isbn + "'";
-		DataBaseHelper<Libro> helper = new DataBaseHelper<Libro>();
-		helper.modificarRegistro(consultaSQL);
-	}
-
-	public void salvar() {
-		String consultaSQL = "update Libro set titulo ='" + this.titulo + "', categoria =  '" + this.categoria + "' ";
-		consultaSQL += " where isbn = '" + this.isbn + "'";
-
-		DataBaseHelper<Libro> helper = new DataBaseHelper<Libro>();
-		helper.modificarRegistro(consultaSQL);
+		log.info("Entrando en buscarPorClave");
+		Session session = HibernateHelper.getSessionFactory().openSession();
+		Transaction transaccion = session.beginTransaction();
+		Libro libro = (Libro) session.get(Libro.class, isbn);
+		transaccion.commit();
+		session.close();
+		return libro;
 	}
 
 	public static List<Libro> buscarPorCategoria(String categoria) {
-		List<Libro> resultado = new ArrayList<Libro>();
-		String consultaSQL = "Select * from LIBRO where categoria = '" + categoria + "'";
-		DataBaseHelper<Libro> helper = new DataBaseHelper<Libro>();
-		resultado = helper.seleccionarRegistros(consultaSQL, Libro.class);
-		return resultado;
+		log.info("Entrando en buscarPorCategoria");
+		Session session = HibernateHelper.getSessionFactory().openSession();
+		Transaction transaccion = session.beginTransaction();
+		Query consulta = session.createQuery("from Libro libro where categoria = :categoria");
+		consulta.setString("categoria", categoria);
+		List<Libro> lista = consulta.list();
+		transaccion.commit();
+		session.close();
+		return lista;
+	}
+
+	public static List<String> buscarTodasLasCategorias() {
+		log.info("buscarTodasLasCategorias");
+		Session session = HibernateHelper.getSessionFactory().openSession();
+		Transaction transaccion = session.beginTransaction();
+		String consulta = "Select distinct libro.categoria from Libro libro";
+		List<String> listaDeCategorias = session.createQuery(consulta).list();
+		transaccion.commit();
+		session.close();
+		return listaDeCategorias;
+	}
+
+	/*
+	 * Al consultar en SQLite deja la BBDD en modo SHARED. Al intentar iniciar otra
+	 * transacción intenta coger el modo exclusive y falla.
+	 */
+	public static List<Libro> buscarTodos() {
+		log.info("Entrando en BuscatTodos");
+		Session session = HibernateHelper.getSessionFactory().openSession();
+		Transaction transaccion = session.beginTransaction();
+		Query consulta = session.createQuery("from Libro libro");
+		List<Libro> lista = consulta.list();
+		transaccion.commit();
+		session.close();
+		return lista;
+	}
+
+	public void insertar() {
+		log.info("Entrando en insertar");
+		Session session = HibernateHelper.getSessionFactory().openSession();
+		Transaction transaccion = session.beginTransaction();
+		session.beginTransaction();
+		session.save(this);
+		transaccion.commit();
+		session.close();
+	}
+
+	public void borrar() {
+		log.info("Entrando en borrar");
+		Session session = HibernateHelper.getSessionFactory().openSession();
+		Transaction transaccion = session.beginTransaction();
+		session.beginTransaction();
+		session.delete(this);
+		transaccion.commit();
+		session.close();
+	}
+
+	public void salvar() {
+		log.info("Entrando en salvar");
+		Session session = HibernateHelper.getSessionFactory().openSession();
+		Transaction transaccion = session.beginTransaction();
+		session.beginTransaction();
+		session.saveOrUpdate(this);
+		transaccion.commit();
+		session.close();
 	}
 
 	@Override
