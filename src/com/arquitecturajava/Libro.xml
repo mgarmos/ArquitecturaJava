@@ -6,10 +6,7 @@
 <hibernate-mapping package="com.arquitecturajava">
 	
 	<class name="Libro" table="Libro">
-		
-		<id name="isbn" type="java.lang.String" column="isbn" >
-			<generator class="increment"/>
-		</id>		
+		<id name="isbn" type="java.lang.String" column="isbn" />
 		
 		<property name="titulo">
 			<column name="titulo" />

@@ -17,9 +17,23 @@ public class Prueba {
 		SessionFactory factoria = new Configuration().configure().buildSessionFactory();
 		session = factoria.openSession();
 		transaccion = session.beginTransaction();
-		Libro libro= new Libro("1","java","programacion");
-		session.saveOrUpdate(libro);
-		transaccion.commit();		
+		Libro libro = null;
+
+		//Insert or update
+		for (int i = 1; i < 12; i++) {
+			libro = new Libro(String.valueOf(i), "java2" + i, "programacion");
+			session.saveOrUpdate(libro);
+			//session.flush();
+		}
+
+		// Delete
+//		for (int i = 1; i < 12; i++) {
+//			libro = new Libro(String.valueOf(i));
+//			session.delete(libro);
+//			session.flush();
+//		}
+
+		transaccion.commit();
 	}
 
 }
