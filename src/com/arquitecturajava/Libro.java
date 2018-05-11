@@ -56,34 +56,46 @@ public class Libro {
 
 	public static Libro buscarPorClave(String isbn) {
 		log.info("Entrando en buscarPorClave");
-		Session session = HibernateHelper.getSessionFactory().openSession();
-		Transaction transaccion = session.beginTransaction();
-		Libro libro = (Libro) session.get(Libro.class, isbn);
-		transaccion.commit();
-		session.close();
+		Session session = null;
+		Libro libro = null;
+		try {
+			session = HibernateHelper.getSessionFactory().openSession();
+			libro = (Libro) session.get(Libro.class, isbn);		
+		} finally {
+			session.close();
+		}
+
 		return libro;
 	}
 
 	public static List<Libro> buscarPorCategoria(String categoria) {
 		log.info("Entrando en buscarPorCategoria");
-		Session session = HibernateHelper.getSessionFactory().openSession();
-		Transaction transaccion = session.beginTransaction();
-		Query consulta = session.createQuery("from Libro libro where categoria = :categoria");
-		consulta.setString("categoria", categoria);
-		List<Libro> lista = consulta.list();
-		transaccion.commit();
-		session.close();
+		Session session = null;
+		List<Libro> lista = null;
+				
+		try {
+			session = HibernateHelper.getSessionFactory().openSession();
+			Query consulta = session.createQuery("from Libro libro where categoria = :categoria");
+			consulta.setString("categoria", categoria);
+			lista = consulta.list();
+		} finally {
+			session.close();
+		}
 		return lista;
 	}
 
 	public static List<String> buscarTodasLasCategorias() {
 		log.info("buscarTodasLasCategorias");
-		Session session = HibernateHelper.getSessionFactory().openSession();
-		Transaction transaccion = session.beginTransaction();
-		String consulta = "Select distinct libro.categoria from Libro libro";
-		List<String> listaDeCategorias = session.createQuery(consulta).list();
-		transaccion.commit();
-		session.close();
+		Session session = null;
+		List<String> listaDeCategorias = null;
+		
+		try {
+			session = HibernateHelper.getSessionFactory().openSession();
+			String consulta = "Select distinct libro.categoria from Libro libro";
+			listaDeCategorias = session.createQuery(consulta).list();
+		} finally {
+			session.close();
+		}
 		return listaDeCategorias;
 	}
 
@@ -93,43 +105,80 @@ public class Libro {
 	 */
 	public static List<Libro> buscarTodos() {
 		log.info("Entrando en BuscatTodos");
-		Session session = HibernateHelper.getSessionFactory().openSession();
-		Transaction transaccion = session.beginTransaction();
-		Query consulta = session.createQuery("from Libro libro");
-		List<Libro> lista = consulta.list();
-		transaccion.commit();
-		session.close();
+		Session session = null;
+		List<Libro> lista = null;
+		
+		try {
+			session = HibernateHelper.getSessionFactory().openSession();
+			Query consulta = session.createQuery("from Libro libro");
+			lista = consulta.list();;
+		} finally {
+			session.close();
+		}
+
 		return lista;
 	}
 
 	public void insertar() {
+		Session session = null;
+		Transaction transaccion = null;
+		try {
+			session = HibernateHelper.getSessionFactory().openSession();
+			System.out.println("session: " + session);
+			transaccion = session.beginTransaction();
+			session.save(this);
+			transaccion.commit();
+			
+		} catch (Exception e) {
+			System.out.println("-------------> Error: " + e.getMessage() + ". " + e.getCause());
+			transaccion.rollback();
+		} finally {
+			session.close();
+		}
 		log.info("Entrando en insertar");
-		Session session = HibernateHelper.getSessionFactory().openSession();
-		Transaction transaccion = session.beginTransaction();
-		session.beginTransaction();
-		session.save(this);
-		transaccion.commit();
-		session.close();
+
+		
 	}
 
 	public void borrar() {
 		log.info("Entrando en borrar");
-		Session session = HibernateHelper.getSessionFactory().openSession();
-		Transaction transaccion = session.beginTransaction();
-		session.beginTransaction();
-		session.delete(this);
-		transaccion.commit();
-		session.close();
+		Session session = null;
+		Transaction transaccion = null;
+		try {
+			session = HibernateHelper.getSessionFactory().openSession();
+			System.out.println("session: " + session);
+			transaccion = session.beginTransaction();
+			session.delete(this);
+			transaccion.commit();
+		} catch (Exception e) {
+			System.out.println("-------------> Error: " + e.getMessage() + ". " + e.getCause());
+			transaccion.rollback();
+		} finally {
+			session.close();
+		}
+		
+
+		
+		System.out.println("transaccion.isActive(): " + transaccion.isActive());
 	}
 
 	public void salvar() {
 		log.info("Entrando en salvar");
-		Session session = HibernateHelper.getSessionFactory().openSession();
-		Transaction transaccion = session.beginTransaction();
-		session.beginTransaction();
-		session.saveOrUpdate(this);
-		transaccion.commit();
-		session.close();
+		Session session = null;
+		Transaction transaccion = null;
+		try {
+			session = HibernateHelper.getSessionFactory().openSession();
+			//transaccion = session.beginTransaction();
+			transaccion = session.beginTransaction();
+			session.saveOrUpdate(this);
+			transaccion.commit();			
+		} catch (Exception e) {
+			System.out.println("-------------> Error: " + e.getMessage() + ". " + e.getCause());
+			transaccion.rollback();
+		} finally {
+			session.close();
+		}
+		
 	}
 
 	@Override

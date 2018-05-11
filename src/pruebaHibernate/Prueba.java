@@ -7,11 +7,26 @@ import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
+import org.hibernate.service.ServiceRegistry;
+import org.hibernate.service.ServiceRegistryBuilder;
 
 import com.arquitecturajava.Libro;
 
 public class Prueba {
+	
+	private static SessionFactory createSessionFactory() {
+		SessionFactory sessionFactory;
+
+		Configuration configuration = new Configuration();
+		configuration.configure();
+		ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder()
+				.applySettings(configuration.getProperties()).build();
+		sessionFactory = configuration.buildSessionFactory(serviceRegistry);
+
+		return sessionFactory;
+	}
 
 	public static void inserOrUpdate() {
 		// Hay que referenciar el classpath a lib para ejecutar el main
@@ -19,7 +34,7 @@ public class Prueba {
 		Transaction transaccion = null;
 
 		// Lee el fichero de configuración
-		SessionFactory factoria = new Configuration().configure().buildSessionFactory();
+		SessionFactory factoria = createSessionFactory();
 
 		// Conexión a BBDD
 		session = factoria.openSession();
@@ -30,7 +45,7 @@ public class Prueba {
 		Libro libro = null;
 		// Insert or update
 		for (int i = 1; i < 12; i++) {
-			libro = new Libro(String.valueOf(i), "java-" + i, "programacion");
+			libro = new Libro(String.valueOf(i+10), "java-0" + i, "programacion");
 			session.saveOrUpdate(libro);
 			session.flush();
 		}
@@ -41,12 +56,11 @@ public class Prueba {
 	}
 
 	public static void delete() {
-		// Hay que referenciar el classpath a lib para ejecutar el main
 		Session session = null;
 		Transaction transaccion = null;
 
 		// Lee el fichero de configuración
-		SessionFactory factoria = new Configuration().configure().buildSessionFactory();
+		SessionFactory factoria = createSessionFactory();
 
 		// Conexión a BBDD
 		session = factoria.openSession();
@@ -69,11 +83,15 @@ public class Prueba {
 	public static void select() {
 		Session session = null;
 		try {
+			
 			// Lee el fichero de configuración
-			SessionFactory factoria = new Configuration().configure().buildSessionFactory();
+			SessionFactory factoria = createSessionFactory();
+
+			System.out.println("factoria: " + factoria);
 
 			// Conexión a BBDD
 			session = factoria.openSession();
+			System.out.println("session: " + session);
 
 			Query consulta = session.createQuery("from Libro libro");
 			List<Libro> lista = consulta.list();
@@ -86,6 +104,10 @@ public class Prueba {
 		} catch (HibernateException e) {
 			System.out.println(e.getMessage());
 
+		} catch (Error e) {
+			System.out.println(e.getMessage() + " Causa: " + e.getCause());
+			e.printStackTrace();
+
 		} finally {
 			session.close();
 		}
@@ -95,8 +117,9 @@ public class Prueba {
 	public static void filter(String categoria) {
 		Session session = null;
 		try {
+
 			// Lee el fichero de configuración
-			SessionFactory factoria = new Configuration().configure().buildSessionFactory();
+			SessionFactory factoria = createSessionFactory();
 
 			// Conexión a BBDD
 			session = factoria.openSession();
@@ -123,7 +146,7 @@ public class Prueba {
 		Session session = null;
 		try {
 			// Lee el fichero de configuración
-			SessionFactory factoria = new Configuration().configure().buildSessionFactory();
+			SessionFactory factoria = createSessionFactory();
 
 			// Conexión a BBDD
 			session = factoria.openSession();
@@ -139,10 +162,10 @@ public class Prueba {
 		}
 
 	}
-	
+
 	/*
-	 * Si se consulta, y despues se iniciia una transazcción se produce 
-	 * el error java.sql.SQLException: database is locked. Ésto sólo pasa con SQLite
+	 * Si se consulta, y despues se iniciia una transazcción se produce el error
+	 * java.sql.SQLException: database is locked. Ésto sólo pasa con SQLite
 	 * 
 	 */
 	public static void main(String[] args) {
@@ -150,9 +173,9 @@ public class Prueba {
 		inserOrUpdate();
 		select();
 		// filter("programacion");
-		buscarTodasCategorias();
-		delete();
-		select();
+		// buscarTodasCategorias();
+		// delete();
+		// select();
 	}
 
 }

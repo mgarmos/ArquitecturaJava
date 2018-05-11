@@ -50,6 +50,21 @@ Tareas :
 	- -> java.lang.ClassNotFoundException: org.objectweb.asm.Type -> asm-3.3.1.jar
 	- -> ... Y por fin ha hecho la inserción - Ja, Ja, Ja
 	
+	Probado altas, mosdificaciones y borrados ->Ok
+	Pruebo consulta.
+	- -> java.lang.NoClassDefFoundError: antlr/ANTLRException -> Falta antlr-2.7.6.jar -> OK
+	
+	- Al integrar busacarTodos() se bloquea la BBDDD -> java.sql.SQLException: database is locked --> Al consultar en SQLite deja la BBDD en modo SHARED. Al intentar iniciar otra transacción intenta coger el  modo exclusive y falla. SOLUCIÓN, 1) Autocmmit a true, 2) Incluir la consulta en una transacción
+	
+	... Integración de hibernate con anotaciones. -> No compila. Descargo-> hibernate-annotations-3.5.6-Final.jar OK
+	-- No reconoce el tag @id ->Descargo hibernate-commons-annotations-5.0.3.Final.jar y ejb3-persistence-3.3.2.Beta1.jar -> Compila @Id
+	-- Elimino el fichero Libro.xml --> org.hibernate.MappingNotFoundException: resource: com/arquitecturajava/Libro.xml not found -> Modifico hibernate.cfg.xml ->
+			<mapping resource="com/arquitecturajava/Libro"/> -> <mapping class="com.arquitecturajava.Libro" /> OK, ahora encuentra la clase (Buscando en el classpath)
+	--> An AnnotationConfiguration instance is required to use <mapping class="com.arquitecturajava.Libro"/> --> Resultado stackOverflow -->
+				Need to add hibernate-annotations jar and build sessionFactory as
+				return new AnnotationConfiguration().configure().buildSessionFactory(); --> Modifico la clase a la que llamo para cargar la configuración.
+	--> java.lang.IncompatibleClassChangeError: Implementing class --> Horror -> problemas de versiones incompatibles en los jars --> Debería montar maven para evitar todo este despropósito
+	
 3. Introducción a Hibernate
 	Hibernate es un framework ORM (Object Relational Mapping) cuya tarea es la de permitir a un desarrollador mapear objetos contra registros de una base de datos (ver imagen). Arquitectura Java 156 Todos los frameworks de persistencia trabajan de forma similar, pero cada uno tiene sus propios ficheros de configuración. En el caso del framework Hibernate existen una serie de ficheros y conceptos claves a la hora de comenzar a trabajar con él. Los enumeramos a continuación basándonos en la clase Libro. 
 	• Hibernate.cfg.xml: Es el fichero principal de configuración del framework, es donde se configura el driver JDBC de acceso a datos la Ip del servidor de base de datos, el usuario y la password ,así como los ficheros de mapeo que van a utilizar las distintas clases. 
@@ -68,9 +83,21 @@ Tareas :
 	
 5. Insertar objetos en la base de datos con Hibernate. 
 6. Selección de objetos de la base de datos con Hibernate. 
-7. Seleccionar un único objeto con Hibernate 
+7. Seleccionar un único objeto con Hibernate
+	COC :El principio COC define que, antes de abordar el desarrollo, un programador puede declarar una serie de convenciones que le permiten asumir una configuración por defecto del sistema. 
 8. Borrar objetos de la base de datos con Hibernate. 
 9. Filtrar objetos de la base de datos con Hibernate 
-10. Construcción de la clase Hibernate Helper. 
-11. Mapeo del fichero de configuración. 
-12. El principio de Convención sobre configuración
+10. Construcción de la clase Hibernate Helper.
+	Nueva clase que substituya a la clase DataBaseHelper y se encargue de inicializar el framework Hibernate. Esta clase se denominará HibernateHelper y inicializará el framework
+11. Hibernate y Convención sobre Configuración.
+	Estamos teniendo información repetida y dispersa. Libro.java, Libro.xml 
+12. DRY e Hibernate
+	Hibernate soporta otro conjunto de anotaciones orientadas a facilitar la persistencia de nuestros objetos. Vamos a hacer uso de estas anotaciones. 
+	• @Entity : Identifica a una clase como clase a persistir 
+	• @Id: Identifica la propiedad de la clase como clave primaria de la tabla 
+	• @Table: Identifica cuál es el nombre de la tabla contra la que se mapea la clase. 
+
+	El uso de este conjunto de anotaciones nos permitirá eliminar los ficheros xml de mapeo que hemos usado hasta ahora.
+		@Entity
+		@Table(name="Libros")	
+	
