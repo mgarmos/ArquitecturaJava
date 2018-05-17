@@ -2,11 +2,17 @@ package com.arquitecturajava;
 
 import java.util.List;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
 import org.apache.log4j.Logger;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.hibernate.annotations.Table;
 
+@Entity
+@Table( appliesTo = "Libro" )
 public class Libro {
 	private static final Logger log = Logger.getLogger(Libro.class.getPackage().getName());
 
@@ -30,6 +36,8 @@ public class Libro {
 	private String titulo;
 	private String categoria;
 
+	
+	@Id
 	public String getIsbn() {
 		return isbn;
 	}
@@ -120,22 +128,23 @@ public class Libro {
 	}
 
 	public void insertar() {
+		log.info("Entrando en insertar");
 		Session session = null;
 		Transaction transaccion = null;
 		try {
 			session = HibernateHelper.getSessionFactory().openSession();
-			System.out.println("session: " + session);
+			
 			transaccion = session.beginTransaction();
 			session.save(this);
 			transaccion.commit();
 			
 		} catch (Exception e) {
-			System.out.println("-------------> Error: " + e.getMessage() + ". " + e.getCause());
+			log.info("-------------> Error: " + e.getMessage() + ". " + e.getCause());
 			transaccion.rollback();
 		} finally {
 			session.close();
 		}
-		log.info("Entrando en insertar");
+		
 
 		
 	}
@@ -146,20 +155,17 @@ public class Libro {
 		Transaction transaccion = null;
 		try {
 			session = HibernateHelper.getSessionFactory().openSession();
-			System.out.println("session: " + session);
+			
 			transaccion = session.beginTransaction();
 			session.delete(this);
 			transaccion.commit();
 		} catch (Exception e) {
-			System.out.println("-------------> Error: " + e.getMessage() + ". " + e.getCause());
+			log.info("-------------> Error: " + e.getMessage() + ". " + e.getCause());
 			transaccion.rollback();
 		} finally {
 			session.close();
 		}
 		
-
-		
-		System.out.println("transaccion.isActive(): " + transaccion.isActive());
 	}
 
 	public void salvar() {
@@ -173,7 +179,7 @@ public class Libro {
 			session.saveOrUpdate(this);
 			transaccion.commit();			
 		} catch (Exception e) {
-			System.out.println("-------------> Error: " + e.getMessage() + ". " + e.getCause());
+			log.info("-------------> Error: " + e.getMessage() + ". " + e.getCause());
 			transaccion.rollback();
 		} finally {
 			session.close();

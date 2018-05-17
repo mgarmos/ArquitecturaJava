@@ -14,7 +14,6 @@ public abstract class Accion {
 		
 		Accion accion = null;
 		String className = "com.arquitecturajava.aplicacion.controlador.acciones." + peticion.substring(1,peticion.length()-3) + "Accion";
-		System.out.println("className: " + className);
 		
 		try {
 			accion = (Accion)Class.forName(className).newInstance();

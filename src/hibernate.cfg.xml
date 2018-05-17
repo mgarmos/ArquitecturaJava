@@ -29,8 +29,11 @@
 		<property name="hbm2ddl.auto">update</property>
 		
 
-		<!-- Mapping Fichero configuracion -->
+		<!-- Mapping Fichero configuracion
 		<mapping resource="com/arquitecturajava/Libro.xml" />
+		-->
+		
+		<mapping class="com.arquitecturajava.Libro" />
 		
 		
 
