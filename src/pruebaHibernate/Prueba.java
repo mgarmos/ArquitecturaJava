@@ -12,6 +12,7 @@ import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistry;
 import org.hibernate.service.ServiceRegistryBuilder;
 
+import com.arquitecturajava.Categoria;
 import com.arquitecturajava.Libro;
 
 public class Prueba {
@@ -44,8 +45,8 @@ public class Prueba {
 
 		Libro libro = null;
 		// Insert or update
-		for (int i = 1; i < 12; i++) {
-			libro = new Libro(String.valueOf(i+10), "java-0" + i, "programacion");
+		for (int i = 3; i < 12; i++) {
+			libro = new Libro(String.valueOf(i+10), "java-0" + i,new Categoria(i%2,"SQL"));
 			session.saveOrUpdate(libro);
 			session.flush();
 		}
@@ -70,7 +71,7 @@ public class Prueba {
 
 		Libro libro = null;
 		// Delete
-		for (int i = 1; i < 12; i++) {
+		for (int i = 13; i <= 31; i++) {
 			libro = new Libro(String.valueOf(i));
 			session.delete(libro);
 		}
@@ -80,7 +81,7 @@ public class Prueba {
 		session.close();
 	}
 
-	public static void select() {
+	public static void selectLibros() {
 		Session session = null;
 		try {
 			
@@ -98,7 +99,7 @@ public class Prueba {
 			for (Libro libro : lista) {
 				System.out.println(" isbn: " + libro.getIsbn());
 				System.out.println(" título: " + libro.getTitulo());
-				System.out.println(" Categoria: " + libro.getCategoria());
+				System.out.println(" Categoria: " + libro.getCategoria().getDescripcion());
 				System.out.println("---");
 			}
 		} catch (HibernateException e) {
@@ -113,8 +114,41 @@ public class Prueba {
 		}
 
 	}
+	
+	public static void selectCategorias() {
+		Session session = null;
+		try {
+			
+			// Lee el fichero de configuración
+			SessionFactory factoria = createSessionFactory();
 
-	public static void filter(String categoria) {
+			System.out.println("factoria: " + factoria);
+
+			// Conexión a BBDD
+			session = factoria.openSession();
+			System.out.println("session: " + session);
+
+			Query consulta = session.createQuery("from Categoria categoria");
+			List<Categoria> lista = consulta.list();
+			for (Categoria categoria : lista) {
+				System.out.println(" id: " + categoria.getId());
+				System.out.println(" descripción: " + categoria.getDescripcion());
+				System.out.println("---");
+			}
+		} catch (HibernateException e) {
+			System.out.println(e.getMessage());
+
+		} catch (Error e) {
+			System.out.println(e.getMessage() + " Causa: " + e.getCause());
+			e.printStackTrace();
+
+		} finally {
+			session.close();
+		}
+
+	}	
+
+	public static void filter(Categoria categoria) {
 		Session session = null;
 		try {
 
@@ -125,13 +159,13 @@ public class Prueba {
 			session = factoria.openSession();
 
 			Query consulta = session.createQuery("from Libro libro where libro.categoria=:categoria");
-			consulta.setString("categoria", categoria);
+			consulta.setInteger("categoria", categoria.getId());
 
 			List<Libro> lista = consulta.list();
 			for (Libro libro : lista) {
 				System.out.println(" isbn: " + libro.getIsbn());
 				System.out.println(" título: " + libro.getTitulo());
-				System.out.println(" Categoria: " + libro.getCategoria());
+				System.out.println(" Categoria: " + libro.getCategoria().getDescripcion());
 				System.out.println("---");
 			}
 		} catch (HibernateException e) {
@@ -169,12 +203,13 @@ public class Prueba {
 	 * 
 	 */
 	public static void main(String[] args) {
-		select();
-		inserOrUpdate();
-		select();
-		// filter("programacion");
+		//selectLibros();
+		selectCategorias();
+		//inserOrUpdate();
+		//select();
+		//filter(new Categoria(1,"Java"));
 		// buscarTodasCategorias();
-		// delete();
+		//delete();
 		// select();
 	}
 

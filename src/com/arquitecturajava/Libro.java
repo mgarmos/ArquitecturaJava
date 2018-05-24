@@ -4,6 +4,8 @@ import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 import org.apache.log4j.Logger;
 import org.hibernate.Query;
@@ -15,6 +17,11 @@ import org.hibernate.annotations.Table;
 @Table( appliesTo = "Libro" )
 public class Libro {
 	private static final Logger log = Logger.getLogger(Libro.class.getPackage().getName());
+	
+	private String isbn;
+	private String titulo;
+	private Categoria categoria;
+
 
 	public Libro() {
 	}
@@ -23,19 +30,14 @@ public class Libro {
 		super();
 		this.isbn = isbn;
 	}
-
-	// TODO Habría que parsear las comillas simples
-	public Libro(String isbn, String titulo, String categoria) {
+	
+	public Libro(String isbn, String titulo, Categoria categoria) {
 		super();
 		this.isbn = isbn;
 		this.titulo = titulo;
 		this.categoria = categoria;
-	}
-
-	private String isbn;
-	private String titulo;
-	private String categoria;
-
+	}	
+	
 	
 	@Id
 	public String getIsbn() {
@@ -54,11 +56,13 @@ public class Libro {
 		this.titulo = titulo;
 	}
 
-	public String getCategoria() {
+	@ManyToOne
+	@JoinColumn(name="categoria")
+	public Categoria getCategoria() {
 		return categoria;
 	}
 
-	public void setCategoria(String categoria) {
+	public void setCategoria(Categoria categoria) {
 		this.categoria = categoria;
 	}
 
@@ -83,7 +87,8 @@ public class Libro {
 				
 		try {
 			session = HibernateHelper.getSessionFactory().openSession();
-			Query consulta = session.createQuery("from Libro libro where categoria = :categoria");
+			//Query consulta = session.createQuery("from Libro libro where categoria = :categoria");
+			Query consulta = session.createQuery("from Libro libro inner join fetch libro.categoria where categoria = :categoria");
 			consulta.setString("categoria", categoria);
 			lista = consulta.list();
 		} finally {
@@ -92,20 +97,7 @@ public class Libro {
 		return lista;
 	}
 
-	public static List<String> buscarTodasLasCategorias() {
-		log.info("buscarTodasLasCategorias");
-		Session session = null;
-		List<String> listaDeCategorias = null;
-		
-		try {
-			session = HibernateHelper.getSessionFactory().openSession();
-			String consulta = "Select distinct libro.categoria from Libro libro";
-			listaDeCategorias = session.createQuery(consulta).list();
-		} finally {
-			session.close();
-		}
-		return listaDeCategorias;
-	}
+
 
 	/*
 	 * Al consultar en SQLite deja la BBDD en modo SHARED. Al intentar iniciar otra
@@ -118,8 +110,8 @@ public class Libro {
 		
 		try {
 			session = HibernateHelper.getSessionFactory().openSession();
-			Query consulta = session.createQuery("from Libro libro");
-			lista = consulta.list();;
+			Query consulta = session.createQuery("from Libro libro inner join fetch libro.categoria");
+			lista = consulta.list();
 		} finally {
 			session.close();
 		}
@@ -191,5 +183,7 @@ public class Libro {
 	public String toString() {
 		return "Libro [isbn=" + isbn + ", titulo=" + titulo + ", categoria=" + categoria + "]";
 	}
+	
+
 
 }

@@ -27,10 +27,10 @@
 				<c:forEach var="categoria" items="${listaDeCategorias}">
 					<c:choose>
 						<c:when test="${categoria==libro.categoria}">
-							<option value="${categoria}" selected="selected">${categoria}</option>
+							<option value="${categoria.id}" selected="selected">${categoria.descripcion}</option>
 						</c:when>
 						<c:otherwise>
-							<option value="${categoria}" >${categoria}</option>
+							<option value="${categoria.id}" >${categoria.descripcion}</option>
 						</c:otherwise>
 					</c:choose>
 				</c:forEach>

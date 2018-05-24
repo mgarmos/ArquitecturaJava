@@ -8,13 +8,14 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.arquitecturajava.Categoria;
 import com.arquitecturajava.Libro;
 
 public class FormularioInsertarLibroAccion extends Accion {
 
 	@Override
 	public void ejecutar(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		List<String> listaCategorias = Libro.buscarTodasLasCategorias();
+		List<Categoria> listaCategorias = Categoria.buscarTodasLasCategorias();
 		request.setAttribute("listaDeCategorias", listaCategorias);
 		RequestDispatcher dispatcher = request.getRequestDispatcher("FormularioInsertarLibro.jsp");
 		dispatcher.forward(request, response);

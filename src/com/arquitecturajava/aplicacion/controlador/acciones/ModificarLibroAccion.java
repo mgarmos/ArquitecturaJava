@@ -5,6 +5,7 @@ import java.io.IOException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.arquitecturajava.Categoria;
 import com.arquitecturajava.Libro;
 
 public class ModificarLibroAccion extends Accion {
@@ -13,9 +14,8 @@ public class ModificarLibroAccion extends Accion {
 	public void ejecutar(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		String isbn = request.getParameter("isbn");
 		String titulo = request.getParameter("titulo");
-		String categoria = request.getParameter("categoria");
-
-		Libro libro = new Libro(isbn, titulo, categoria);
+		int categoria = Integer.parseInt(request.getParameter("categoria"));
+		Libro libro = new Libro(isbn, titulo, new Categoria(categoria));
 		libro.salvar();
 		response.sendRedirect("MostrarLibros.do");
 	}

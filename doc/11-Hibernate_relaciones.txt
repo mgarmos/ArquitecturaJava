@@ -1,0 +1,40 @@
+Objetivos: 
+Evolucionar la aplicación JEE para que soporte un modelo de objetos complejo a nivel de capa de persistencia. 
+
+Tareas: 
+1. Construir la clase Categoría y mapearla 
+2. Modificar la capa de presentación para soportar la clase Categoría 
+3. Creación de relaciones entre clases
+- Una  Categoria  contiene  varios  Libros:  Relación  de  1  a  n  en  la  que  una  categoría  contiene  un  conjunto  de  libros. 
+- Un  Libro  pertenece  a  una  categoría:  Relación  de  n  a  1  en  la  que  cada  Libro  pertenece  a  una  categoría  concreta.
+Para  que  esta  relación  exista  a  nivel  de  código  Java,  la  clase  Categoría  debe  incluir  un  List<>  de  Libros  y  la  clase  Libro  debe  incluir  una  variable  de  tipo  Categoría.
+
+Creo las tablas a mano porque SQLITE no permite añadir Foreign keys, hay que hacerlo al crar la tabla
+CREATE TABLE Categoria (ID integer not null, descripcion varchar(255), primary k
+ey (ID));
+CREATE TABLE Libro (
+        isbn varchar(255) not null,
+        titulo varchar(255),
+        categoria integer,
+        primary key (isbn)
+        FOREIGN KEY (categoria) REFERENCES Categoria(id));
+
+4. Relaciones y persistencia con Hibernate
+
+5. Relaciones y capa de presentación
+- Se modifica la capa de presentación haciendo que muestre: ${libro.isbn} - ${libro.titulo} - ${libro.categoria.descripcion}
+- Para conseguir la información de dos libros está haciendo las siguientes query's:
+	Libro.java->buscarTodos() - Entrando en BuscatTodos
+	Hibernate: select libro0_.isbn as isbn1_1_, libro0_.categoria as categori3_1_, libro0_.titulo as titulo2_1_ from Libro libro0_
+	Hibernate: select categoria0_.ID as ID1_0_0_, categoria0_.descripcion as descripc2_0_0_ from Categoria categoria0_ where categoria0_.ID=?
+	Hibernate: select categoria0_.ID as ID1_0_0_, categoria0_.descripcion as descripc2_0_0_ from Categoria categoria0_ where categoria0_.ID=?
+  Hace una consulta a Categoria por cada libro: Debería hacerse una única query con join para optimizar los accesos a BBDD.
+  
+ -> List<Libro> listaDeLibros = session.createQuery("from Libro libro inner join fetch libro.categoria"); //SQLITE no permite RIGHT JOIN
+ 
+ Resultado:
+ Libro.java->buscarTodos() - Entrando en BuscatTodos
+	Hibernate: select libro0_.isbn as isbn1_1_0_, categoria1_.ID as ID1_0_1_, libro0_.categoria as categori3_1_0_, libro0_.titulo as titulo2_1_0_, categoria1_.descripcion as descripc2_0_1_ from Libro libro0_ inner join Categoria categoria1_ on libro0_.categoria=categoria1_.ID
+	
+Resumen
+En este capítulo hemos mostrado como construir un modelo de persistencia más flexible construyendo relaciones entre los distintos objetos. Aunque hemos aumentado la flexibilidad, también hemos incrementado la complejidad a la hora de abordar un desarrollo, introduciendo características avanzadas de los frameworks de persistencia.	

@@ -8,6 +8,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.arquitecturajava.Categoria;
 import com.arquitecturajava.Libro;
 
 public class FormularioEditarLibroAccion extends Accion {
@@ -20,7 +21,7 @@ public class FormularioEditarLibroAccion extends Accion {
 		request.setAttribute("libro", libro);
 
 		// Cargar categorias
-		List<String> listaCategorias = Libro.buscarTodasLasCategorias();
+		List<Categoria> listaCategorias = Categoria.buscarTodasLasCategorias();
 		request.setAttribute("listaDeCategorias", listaCategorias);
 
 		RequestDispatcher dispatcher = request.getRequestDispatcher("FormularioEditarLibro.jsp");
