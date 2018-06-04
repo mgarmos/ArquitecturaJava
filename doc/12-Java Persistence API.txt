@@ -1,0 +1,20 @@
+NOTA: Pendiente de implementar: problemas con las dependencias de Hibernate
+
+
+Objetivos:
+Migrar la capa de persistencia de nuestra aplicación a JPA 
+
+Tareas: 
+1. Introducción al API de JPA
+
+ • Persistence: Hace referencia a la configuración de JPA y es similar a la clase Configurator de Hibernate. 
+ • EntityManagerFactory: Factoría que se encarga de inicializar el framework, su rol es similar al SessionFactory de Hibernate que hemos utilizado en capítulos anteriores. • EntityManager: Clase que se encarga de gestionar la persistencia de un conjunto de entidades similar al objeto Session del API de Hibernate. 
+ • EntityTransaction: Clase que se encarga de definir el concepto de transacción, similar a Transaction en Hibernate.
+ • TypedQuery: Identifica una consulta definida con JPQL (Java Persistence Query Language) similar a la clase Query de Hibernate con la única salvedad que soporta el uso de genéricos. 
+ • Persistence.xml: Fichero que reemplaza al fichero clásico de Hibernate “Hibernate.cfg.xml” y que contiene todos los parámetros necesarios para conectarnos contra un servidor de base de datos.
+ 
+2. Migración de la aplicación a JPA.
+	- hay que configurar el fichero persistence.xml. Este fichero tiene que estar en src/resources/MetaInf/Services
+	- hay que añadir el jar  META-INF/services/javax.persistence.spi.PersistenceProvider file. for hibernate, it's located in hibernate-entitymanager-XXX.jar,
+
+3. Manejo de Excepciones y JPA

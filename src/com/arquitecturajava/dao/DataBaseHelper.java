@@ -1,4 +1,4 @@
-package com.arquitecturajava;
+package com.arquitecturajava.dao;
 
 import java.lang.reflect.Method;
 import java.sql.Connection;

@@ -1,4 +1,4 @@
-package com.arquitecturajava;
+package com.arquitecturajava.dao;
 
 public class DataBaseException extends RuntimeException {
 	private static final long serialVersionUID = 1L;

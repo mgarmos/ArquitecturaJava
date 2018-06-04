@@ -13,7 +13,7 @@ import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.annotations.Table;
 
-import com.arquitecturajava.HibernateHelper;
+import com.arquitecturajava.dao.HibernateHelper;
 
 @Entity
 @Table( appliesTo = "Categoria" )
@@ -72,21 +72,13 @@ public class Categoria {
 		this.libros = libros;
 	}	
 	
-	public static List<Categoria> buscarTodasLasCategorias() {
-		log.info("buscarTodasLasCategorias");
-		Session session = null;
-		List<Categoria> listaDeCategorias = null;
-		
-		try {
-			session = HibernateHelper.getSessionFactory().openSession();
-			Query consulta = session.createQuery("from Categoria categoria");
-			listaDeCategorias = consulta.list();
-		} finally {
-			session.close();
-		}
-		return listaDeCategorias;
-	}
 
+
+
+	@Override
+	public String toString() {
+		return "Categoria [id=" + id + ", descripcion=" + descripcion + "]";
+	}
 
 	@Override
 	public int hashCode() {

@@ -1,0 +1,9 @@
+Objetivos :
+	Aplicar el principio ISP a la capa de Persistencia.(Una clase cliente A que tiene una dependencia con la clase B no debe verse forzada a depender de métodos de la clase B que no vaya a usar jamás: Mínmo acoplamiento)
+	--> Separación de los métodos de negocio del los métoidos de persistencia.
+Tareas:
+1. Crear las clases LibroDAO y PersonaDAO que cumplan con el principio ISP:
+	- Se pasan los métodos de acceso a BBDD a las clases de DAO
+2. Uso de interfaces a nivel DAO para permitir varias implementaciones 
+3. Creación de DAOs Genéricos 
+4. Rendimiento

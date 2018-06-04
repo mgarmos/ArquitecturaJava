@@ -1,4 +1,4 @@
-package com.arquitecturajava;
+package com.arquitecturajava.dao;
 
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
