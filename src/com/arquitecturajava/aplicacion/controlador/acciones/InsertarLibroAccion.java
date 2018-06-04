@@ -5,8 +5,8 @@ import java.io.IOException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.arquitecturajava.Categoria;
-import com.arquitecturajava.Libro;
+import com.arquitecturajava.negocio.Categoria;
+import com.arquitecturajava.negocio.Libro;
 
 public class InsertarLibroAccion extends Accion {
 

@@ -1,4 +1,4 @@
-package com.arquitecturajava;
+package com.arquitecturajava.negocio;
 
 import java.util.List;
 
@@ -12,6 +12,8 @@ import org.apache.log4j.Logger;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.annotations.Table;
+
+import com.arquitecturajava.HibernateHelper;
 
 @Entity
 @Table( appliesTo = "Categoria" )
