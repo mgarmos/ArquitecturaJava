@@ -35,8 +35,8 @@
 		<mapping resource="com/arquitecturajava/Libro.xml" />
 		-->
 		
-		<mapping class="com.arquitecturajava.Libro" />
-		<mapping class="com.arquitecturajava.Categoria" />
+		<mapping class="com.arquitecturajava.negocio.Libro" />
+		<mapping class="com.arquitecturajava.negocio.Categoria" />
 		
 		
 
