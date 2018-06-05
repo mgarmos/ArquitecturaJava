@@ -17,7 +17,7 @@ public class FormularioInsertarLibroAccion extends Accion {
 	@Override
 	public void ejecutar(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		CategoriaDAO categoriaDAO = new CategoriaDAOHibernateImpl();
-		List<Categoria> listaCategorias = categoriaDAO.buscarTodasLasCategorias();
+		List<Categoria> listaCategorias = categoriaDAO.buscarTodos();
 		request.setAttribute("listaDeCategorias", listaCategorias);
 		RequestDispatcher dispatcher = request.getRequestDispatcher("FormularioInsertarLibro.jsp");
 		dispatcher.forward(request, response);

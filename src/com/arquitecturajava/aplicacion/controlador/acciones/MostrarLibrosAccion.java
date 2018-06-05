@@ -22,7 +22,7 @@ public class MostrarLibrosAccion extends Accion {
 			throws ServletException, IOException {
 		// delegan en la capa de persistencia y cargan la información que la página
 		CategoriaDAO categoriaDAO = new CategoriaDAOHibernateImpl();
-		List<Categoria> listaCategorias = categoriaDAO.buscarTodasLasCategorias();
+		List<Categoria> listaCategorias = categoriaDAO.buscarTodos();
 		request.setAttribute("listaDeCategorias", listaCategorias);
 
 		String categoria = request.getParameter("categoria");

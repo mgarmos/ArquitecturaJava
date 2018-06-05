@@ -13,7 +13,7 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.annotations.Table;
 
-import com.arquitecturajava.dao.HibernateHelper;
+import com.arquitecturajava.dao.hibernate.HibernateHelper;
 
 @Entity
 @Table( appliesTo = "Libro" )

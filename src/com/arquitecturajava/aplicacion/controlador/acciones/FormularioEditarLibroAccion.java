@@ -27,7 +27,7 @@ public class FormularioEditarLibroAccion extends Accion {
 
 		// Cargar categorias
 		CategoriaDAO categoriaDAO = new CategoriaDAOHibernateImpl();
-		List<Categoria> listaCategorias = categoriaDAO.buscarTodasLasCategorias();
+		List<Categoria> listaCategorias = categoriaDAO.buscarTodos();
 		request.setAttribute("listaDeCategorias", listaCategorias);
 
 		RequestDispatcher dispatcher = request.getRequestDispatcher("FormularioEditarLibro.jsp");

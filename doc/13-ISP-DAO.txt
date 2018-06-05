@@ -4,6 +4,11 @@ Objetivos :
 Tareas:
 1. Crear las clases LibroDAO y PersonaDAO que cumplan con el principio ISP:
 	- Se pasan los métodos de acceso a BBDD a las clases de DAO
-2. Uso de interfaces a nivel DAO para permitir varias implementaciones 
-3. Creación de DAOs Genéricos 
+2. Uso de interfaces a nivel DAO para permitir varias implementaciones
+	
+3. Creación de DAOs Genéricos. El patrón genericDAO
+	Todas las clases DAO contiene la misa funcionalidad: salvar, borrar, buscarPorclave y buscarTodos. 
+	Creamos un nuevo interface con todas las funciones que serán compartidas pro todas las clases de forma genérica.
+	Creamos una clase generica parametrizada para implementar las operaciones compartidas en BBDD.
+	
 4. Rendimiento

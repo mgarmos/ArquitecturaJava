@@ -1,10 +1,13 @@
-package com.arquitecturajava.dao;
+package com.arquitecturajava.dao.hibernate;
 
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistry;
 
+/**
+ * Crea la session cargando la configuración del fichero hibernate.cfg.xml 
+ */
 public class HibernateHelper {
 
 	private static  SessionFactory sessionFactory = buildSessionFactory();
