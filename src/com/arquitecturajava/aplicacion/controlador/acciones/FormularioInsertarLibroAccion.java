@@ -8,19 +8,18 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.arquitecturajava.dao.CategoriaDAO;
-import com.arquitecturajava.dao.CategoriaDAOFactory;
+import com.arquitecturajava.dao.DAOAbstractFactory;
+import com.arquitecturajava.dao.DAOFactory;
 import com.arquitecturajava.negocio.Categoria;
 
 public class FormularioInsertarLibroAccion extends Accion {
 
 	@Override
 	public void ejecutar(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		CategoriaDAO categoriaDAO = CategoriaDAOFactory.getInstance();
-		List<Categoria> listaCategorias = categoriaDAO.buscarTodos();
+		DAOFactory factoria = DAOAbstractFactory.getInstance();
+		List<Categoria> listaCategorias = factoria.getCategoriaDAO().buscarTodos();
 		request.setAttribute("listaDeCategorias", listaCategorias);
 		RequestDispatcher dispatcher = request.getRequestDispatcher("FormularioInsertarLibro.jsp");
 		dispatcher.forward(request, response);
 	}
-
 }

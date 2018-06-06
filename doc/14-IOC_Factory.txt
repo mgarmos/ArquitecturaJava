@@ -1,0 +1,52 @@
+Inversión de Control (Inversion of Control o IOC): El principio de inversión de control consiste en que el control de la construcción de los objetos no recae directamente en el desarrollador a través del uso del operador new, sino que es otra clase o conjunto de clases las que se encargan de construir los objetos que necesitamos.
+
+
+
+Objetivos: 
+• Aplicar el principio de inversión de control IOC a la capa de persistencia de nuestra aplicación. 
+
+Tareas: 
+1. Crear factorias e implementar el principio de IOC.
+	- Busco y marco todas las referencias q new ...DAO() -> 8 veces
+	- Se implementa un DAOFactory que tenga la responsabilidad de construir las distintas implementaciones (En realidad sólo hay una y es Hibernate.) -> Un Factory por calse de negocio: Ko
+
+2. El principio DRY y el patrón Abstract Factory.
+	- Por cada clase de negocio que tengamos, tendremos que cosntruir una factoria.
+		El patrón abstract factory es un patrón de diseño que se apoya en la construcción de un grupo reducido de factorías. Concretamente una factoría por cada familia de clases que tengamos 
+		y otra factoría que agrupa a las factorías encargadas de crear las familias.
+		
+		
+3. El patrón Abstract Factory y el uso de interfaces.
+
+Resumen:
+Una vez rediseñada la capa de persistencia podremos de una manera sencilla cambiar una capa por otra sin tener necesidad de tocar el código fuente, 
+cumpliendo con el principio OCP. Para ello habremos añadido las siguientes clases a la capa DAO:
+
+
+DAOAbstractFactory: Devuelve una factoria (DAOFactory) en base a un fichero de configuración. -> P.Ej. DAoHibernateFactory
+DAOFactory: Define los metodos de acceso a datos que tendrán que implementar los DAO's
+DAOHiernateFactory: Implementa DAOFactory. Devuelve la implementación de los DAO's, tantos como clases de negocio existan. P. Ej (LibroDAO, CategoriaDAO)
+
+GenericDAO: Inerfaz tipada que define los métodos comunes de todos los DAO. (P. Ej. borrar, insertar, modificar, consultar, etc). 
+GenericDAOHibernateImpl: Clase tipada genérica que implementa los métodos comunes de los DAO's con Hibernate. De esta clase heredan los DAO's específicos de un acceso a datos
+
+LibroDAO: Interfaz que define los métodos de acceso a BBDD para la tabla Libro.
+LibroDAOHibernateImpl: Implementación de LibroDAO, (metodos de acceso) apoyándose en la implementación genérica de GenericDAOHibernateImpl
+
+CategoriaDAO: Interfaz que define los métodos de acceso a BBDD para la tabla Catgegoria.
+CategoriaDAOHibernateImpl: Implementación de CategoriaDAO, (metodos de acceso) apoyándose en la implementación genérica de GenericDAOHibernateImpl
+
+xxxxx -> Diferentes ORM (hibernate, hibatis, JdBC,...)
+nnnnn -> diferentes clases de negocio (Libro, Categoria, ...)
+
+- Si se añade un nuevo DAO habría que modificar la parte de factoria
+	* DAOfactory: Se define el método que devuelve el DAO
+	* DAOxxxxFactory: Se añade el método que devuelve el DAO nuevo para la implementación xxxxx (hibernate, hibatis, JdBC,...)
+	* NnnnDAO: Se crea la interfaz que define los métodos del nuevo DAO
+	* NnnnDAOXxxxxImpl -> Se crea la implementación para el ORM de cada método del nuevo DAO
+
+- Si se añade un nuevo método de acceso común para todos los DAO's habría que modificar la parte de DAO's:
+	* GenericDAO -> añadir la definición del método
+	* GenericDAOHibernateImpl -> Implementación del método común para hibernate
+	* NnnnDAO -> Se añade el nuevo metodo de acceso
+	* NnnnDAOXxxxxImpl -> Se modifica un método en concreto si se quiere optmizar, o se añade un método particular

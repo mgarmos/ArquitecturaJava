@@ -5,13 +5,11 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
-import org.apache.log4j.Logger;
 import org.hibernate.annotations.Table;
 
 @Entity
 @Table( appliesTo = "Libro" )
 public class Libro {
-	private static final Logger log = Logger.getLogger(Libro.class.getPackage().getName());
 	
 	private String isbn;
 	private String titulo;

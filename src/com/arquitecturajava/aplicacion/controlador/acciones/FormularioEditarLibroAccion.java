@@ -9,9 +9,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.arquitecturajava.dao.CategoriaDAO;
-import com.arquitecturajava.dao.CategoriaDAOFactory;
+import com.arquitecturajava.dao.DAOAbstractFactory;
+import com.arquitecturajava.dao.DAOFactory;
 import com.arquitecturajava.dao.LibroDAO;
-import com.arquitecturajava.dao.LibroDAOFactory;
 import com.arquitecturajava.negocio.Categoria;
 import com.arquitecturajava.negocio.Libro;
 
@@ -19,14 +19,17 @@ public class FormularioEditarLibroAccion extends Accion {
 
 	@Override
 	public void ejecutar(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		DAOFactory factoria = DAOAbstractFactory.getInstance();
+		
 		// Buscar libro por clave
 		String isbn = request.getParameter("isbn");
-		LibroDAO libroDAO = LibroDAOFactory.getInstance();
+		LibroDAO libroDAO = factoria.getLibroDAO();
 		Libro libro = libroDAO.buscarPorClave(isbn);
 		request.setAttribute("libro", libro);
 
 		// Cargar categorias
-		CategoriaDAO categoriaDAO = CategoriaDAOFactory.getInstance();
+		
+		CategoriaDAO categoriaDAO = factoria.getCategoriaDAO();
 		List<Categoria> listaCategorias = categoriaDAO.buscarTodos();
 		request.setAttribute("listaDeCategorias", listaCategorias);
 

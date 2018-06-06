@@ -9,9 +9,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.arquitecturajava.dao.CategoriaDAO;
-import com.arquitecturajava.dao.CategoriaDAOFactory;
+import com.arquitecturajava.dao.DAOAbstractFactory;
+import com.arquitecturajava.dao.DAOFactory;
 import com.arquitecturajava.dao.LibroDAO;
-import com.arquitecturajava.dao.LibroDAOFactory;
 import com.arquitecturajava.dao.hibernate.LibroDAOHibernateImpl;
 import com.arquitecturajava.negocio.Categoria;
 import com.arquitecturajava.negocio.Libro;
@@ -21,8 +21,11 @@ public class MostrarLibrosAccion extends Accion {
 	@Override
 	public void ejecutar(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+
+		DAOFactory factoria = DAOAbstractFactory.getInstance();
+
 		// delegan en la capa de persistencia y cargan la información que la página
-		CategoriaDAO categoriaDAO = CategoriaDAOFactory.getInstance();
+		CategoriaDAO categoriaDAO = factoria.getCategoriaDAO();
 		List<Categoria> listaCategorias = categoriaDAO.buscarTodos();
 		request.setAttribute("listaDeCategorias", listaCategorias);
 
@@ -32,7 +35,7 @@ public class MostrarLibrosAccion extends Accion {
 		if (categoria != null && !categoria.equals("")) {
 			libros = LibroDAOHibernateImpl.buscarPorCategoria(categoria);
 		} else {
-			LibroDAO libroDAO = LibroDAOFactory.getInstance();
+			LibroDAO libroDAO = factoria.getLibroDAO();
 			libros = libroDAO.buscarTodos();
 		}
 		request.setAttribute("libros", libros);

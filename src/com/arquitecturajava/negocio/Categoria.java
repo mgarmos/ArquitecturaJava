@@ -8,13 +8,11 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 
-import org.apache.log4j.Logger;
 import org.hibernate.annotations.Table;
 
 @Entity
 @Table( appliesTo = "Categoria" )
 public class Categoria {
-	private static final Logger log = Logger.getLogger(Libro.class.getPackage().getName());
 	
 	private Integer id;
 	private String descripcion;
