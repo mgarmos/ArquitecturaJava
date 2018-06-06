@@ -18,13 +18,10 @@ public abstract class Accion {
 		try {
 			accion = (Accion)Class.forName(className).newInstance();
 		} catch (InstantiationException e ) {
-			// TODO 
 			e.printStackTrace();
 		} catch (IllegalAccessException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 				

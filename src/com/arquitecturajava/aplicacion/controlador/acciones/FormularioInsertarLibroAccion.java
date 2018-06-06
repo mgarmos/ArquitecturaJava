@@ -9,14 +9,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.arquitecturajava.dao.CategoriaDAO;
-import com.arquitecturajava.dao.hibernate.CategoriaDAOHibernateImpl;
+import com.arquitecturajava.dao.CategoriaDAOFactory;
 import com.arquitecturajava.negocio.Categoria;
 
 public class FormularioInsertarLibroAccion extends Accion {
 
 	@Override
 	public void ejecutar(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		CategoriaDAO categoriaDAO = new CategoriaDAOHibernateImpl();
+		CategoriaDAO categoriaDAO = CategoriaDAOFactory.getInstance();
 		List<Categoria> listaCategorias = categoriaDAO.buscarTodos();
 		request.setAttribute("listaDeCategorias", listaCategorias);
 		RequestDispatcher dispatcher = request.getRequestDispatcher("FormularioInsertarLibro.jsp");

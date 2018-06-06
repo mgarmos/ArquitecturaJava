@@ -1,19 +1,12 @@
 package com.arquitecturajava.negocio;
 
-import java.util.List;
-
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 import org.apache.log4j.Logger;
-import org.hibernate.Query;
-import org.hibernate.Session;
-import org.hibernate.Transaction;
 import org.hibernate.annotations.Table;
-
-import com.arquitecturajava.dao.hibernate.HibernateHelper;
 
 @Entity
 @Table( appliesTo = "Libro" )

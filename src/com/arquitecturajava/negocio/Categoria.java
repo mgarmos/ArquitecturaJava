@@ -9,11 +9,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 
 import org.apache.log4j.Logger;
-import org.hibernate.Query;
-import org.hibernate.Session;
 import org.hibernate.annotations.Table;
-
-import com.arquitecturajava.dao.hibernate.HibernateHelper;
 
 @Entity
 @Table( appliesTo = "Categoria" )

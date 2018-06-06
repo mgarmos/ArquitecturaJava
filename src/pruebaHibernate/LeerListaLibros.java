@@ -39,7 +39,6 @@ public class LeerListaLibros {
 			lector.close();
 
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 			System.out.println(e.getMessage());
 		} finally {
@@ -47,7 +46,6 @@ public class LeerListaLibros {
 				
 				reader.close();
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 				System.out.println(e.getMessage());
 			}

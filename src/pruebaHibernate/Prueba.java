@@ -10,13 +10,12 @@ import org.hibernate.Transaction;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistry;
-import org.hibernate.service.ServiceRegistryBuilder;
 
 import com.arquitecturajava.negocio.Categoria;
 import com.arquitecturajava.negocio.Libro;
 
 public class Prueba {
-	
+
 	private static SessionFactory createSessionFactory() {
 		SessionFactory sessionFactory;
 
@@ -46,7 +45,7 @@ public class Prueba {
 		Libro libro = null;
 		// Insert or update
 		for (int i = 3; i < 12; i++) {
-			libro = new Libro(String.valueOf(i+10), "java-0" + i,new Categoria(i%2,"SQL"));
+			libro = new Libro(String.valueOf(i + 10), "java-0" + i, new Categoria(i % 2, "SQL"));
 			session.saveOrUpdate(libro);
 			session.flush();
 		}
@@ -84,7 +83,7 @@ public class Prueba {
 	public static void selectLibros() {
 		Session session = null;
 		try {
-			
+
 			// Lee el fichero de configuración
 			SessionFactory factoria = createSessionFactory();
 
@@ -114,11 +113,11 @@ public class Prueba {
 		}
 
 	}
-	
+
 	public static void selectCategorias() {
 		Session session = null;
 		try {
-			
+
 			// Lee el fichero de configuración
 			SessionFactory factoria = createSessionFactory();
 
@@ -146,7 +145,7 @@ public class Prueba {
 			session.close();
 		}
 
-	}	
+	}
 
 	public static void filter(Categoria categoria) {
 		Session session = null;
@@ -203,13 +202,13 @@ public class Prueba {
 	 * 
 	 */
 	public static void main(String[] args) {
-		//selectLibros();
+		// selectLibros();
 		selectCategorias();
-		//inserOrUpdate();
-		//select();
-		//filter(new Categoria(1,"Java"));
+		// inserOrUpdate();
+		// select();
+		// filter(new Categoria(1,"Java"));
 		// buscarTodasCategorias();
-		//delete();
+		// delete();
 		// select();
 	}
 
