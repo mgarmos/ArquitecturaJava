@@ -8,29 +8,25 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.arquitecturajava.dao.CategoriaDAO;
-import com.arquitecturajava.dao.DAOAbstractFactory;
-import com.arquitecturajava.dao.DAOFactory;
-import com.arquitecturajava.dao.LibroDAO;
-import com.arquitecturajava.negocio.Categoria;
-import com.arquitecturajava.negocio.Libro;
+import com.arquitecturajava.negocio.ServicioLibros;
+import com.arquitecturajava.negocio.ServicioLibrosImpl;
+import com.arquitecturajava.negocio.bean.Categoria;
+import com.arquitecturajava.negocio.bean.Libro;
 
 public class FormularioEditarLibroAccion extends Accion {
 
 	@Override
 	public void ejecutar(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		DAOFactory factoria = DAOAbstractFactory.getInstance();
+		
+		ServicioLibros servicioLibros = new ServicioLibrosImpl();
 		
 		// Buscar libro por clave
 		String isbn = request.getParameter("isbn");
-		LibroDAO libroDAO = factoria.getLibroDAO();
-		Libro libro = libroDAO.buscarPorClave(isbn);
+		Libro libro = servicioLibros.buscarLibroPorclave(isbn);		
 		request.setAttribute("libro", libro);
 
 		// Cargar categorias
-		
-		CategoriaDAO categoriaDAO = factoria.getCategoriaDAO();
-		List<Categoria> listaCategorias = categoriaDAO.buscarTodos();
+		List<Categoria> listaCategorias = servicioLibros.buscarCategoriasLibros();				
 		request.setAttribute("listaDeCategorias", listaCategorias);
 
 		RequestDispatcher dispatcher = request.getRequestDispatcher("FormularioEditarLibro.jsp");

@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.arquitecturajava.dao.DAOAbstractFactory;
 import com.arquitecturajava.dao.DAOFactory;
-import com.arquitecturajava.negocio.Categoria;
+import com.arquitecturajava.negocio.bean.Categoria;
 
 public class FormularioInsertarLibroAccion extends Accion {
 

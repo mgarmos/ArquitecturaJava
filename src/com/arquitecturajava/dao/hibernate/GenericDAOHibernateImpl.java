@@ -70,10 +70,16 @@ public abstract class GenericDAOHibernateImpl<T, Id extends Serializable> implem
 
 	public T buscarPorClave(Id id) {
 		Session session = null;
+		Transaction transaccion = null;
 		T objeto = null;
 		try {
 			session = HibernateHelper.getSessionFactory().openSession();
+			transaccion = session.beginTransaction();
 			objeto = (T) session.get(claseDePersistencia, id);
+			transaccion.commit();
+		} catch (Exception e) {
+			transaccion.rollback();
+			throw e;
 		} finally {
 			session.close();
 		}
@@ -83,14 +89,19 @@ public abstract class GenericDAOHibernateImpl<T, Id extends Serializable> implem
 	
 	public List<T> buscarTodos() {
 		Session session = null;
+		Transaction transaccion = null;
 		List<T> lista = null;
 		
 		try {
 			session = HibernateHelper.getSessionFactory().openSession();
+			transaccion = session.beginTransaction();
 			Query consulta = session.createQuery("from " + claseDePersistencia.getSimpleName() + " o");
 			System.out.println("consulta: " + consulta);
-			
 			lista = consulta.list();
+			transaccion.commit();
+		} catch (Exception e) {
+			transaccion.rollback();
+			throw e;			
 		} finally {
 			session.close();
 		}

@@ -11,8 +11,8 @@ import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistry;
 
-import com.arquitecturajava.negocio.Categoria;
-import com.arquitecturajava.negocio.Libro;
+import com.arquitecturajava.negocio.bean.Categoria;
+import com.arquitecturajava.negocio.bean.Libro;
 
 public class Prueba {
 

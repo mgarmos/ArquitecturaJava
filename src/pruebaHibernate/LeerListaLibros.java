@@ -8,8 +8,8 @@ import java.io.Reader;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.arquitecturajava.negocio.Categoria;
-import com.arquitecturajava.negocio.Libro;
+import com.arquitecturajava.negocio.bean.Categoria;
+import com.arquitecturajava.negocio.bean.Libro;
 
 
 

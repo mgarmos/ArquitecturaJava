@@ -2,7 +2,7 @@ package com.arquitecturajava.dao;
 
 import java.util.List;
 
-import com.arquitecturajava.negocio.Libro;
+import com.arquitecturajava.negocio.bean.Libro;
 
 public interface LibroDAO {
 
@@ -12,11 +12,9 @@ public interface LibroDAO {
 
 	Libro buscarPorClave(String isbn);
 
-	/*
-	 * Al consultar en SQLite deja la BBDD en modo SHARED. Al intentar iniciar otra
-	 * transacción intenta coger el modo exclusive y falla.
-	 */
 	List<Libro> buscarTodos();
+	
+	List<Libro> buscarPorCategoria(String categoria);
 
 	void borrar(Libro libro);
 

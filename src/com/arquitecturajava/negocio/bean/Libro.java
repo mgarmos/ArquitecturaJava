@@ -1,4 +1,4 @@
-package com.arquitecturajava.negocio;
+package com.arquitecturajava.negocio.bean;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;

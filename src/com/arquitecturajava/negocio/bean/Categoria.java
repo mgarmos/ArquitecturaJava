@@ -1,4 +1,4 @@
-package com.arquitecturajava.negocio;
+package com.arquitecturajava.negocio.bean;
 
 import java.util.List;
 

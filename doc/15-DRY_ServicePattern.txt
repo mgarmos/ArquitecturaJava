@@ -1,0 +1,16 @@
+En el paso anterior se ha aumentado la complejidad del manejo de la capa de persistencia. Además se llama directamente desde la capa controladora a la de persistencia.
+Para desacoplar, se creará una capa de servicio (capa de negocio) encargada de gestionar las llamadas a la capa de persistencia
+
+Objetivos: 
+• Simplificar el acceso a la capa de persistencia
+
+Tareas: 
+1. Uso del principio DRY en el acceso a la capa de persistencia
+	- Cada vez que se llama a la capa de persistencia desde una acción, se está repitiendo código:
+			DAOFactory factoria = DAOAbstractFactory.getInstance();
+			LibroDAO libroDAO = factoria.getLibroDAO();
+
+2. Creación de una clase de servicio que simplifique el acceso.
+	- Para que esta capa pueda disponer de la flexibilidad similar a la capa de persistencia, se utilizarán interfaces.
+	- Se agrupará en la clase de servicio todas las funcionalidades asociadas con Libro
+	
