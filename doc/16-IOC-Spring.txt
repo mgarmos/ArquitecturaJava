@@ -1,0 +1,18 @@
+Objetivos:
+• Introducción al framework Spring.
+• Permitir a la aplicación cambiar las implementaciones de clases concretas de forma totalmente transparente al desarrollador, aportando flexibilidad a la aplicación usando Spring framework
+
+El  framework  Spring  es  un  framework  de  Inversión  de  Control  que  nos  permite  gestionar  nuestras  necesidades  de  inversión  de  control  agrupada  y  sencillamente  sin  tener  que  recurrir  al  uso  de  patrones  de  diseño  clásicos  (como  Factory  y  Abstract  Factory)
+
+Tareas: 
+1. Creación de ejemplo elemental de factorías
+	Se crean dos implementaciones del mensaje hola()
+	Mediante una factoria se instancia uno u otro.
+	Se integra con Spring. Se crea el fichero 
+2. Instalación de Spring Framework
+	Se incluye la dependencia en maven.
+	
+		
+3. Configuración de Spring en nuestra aplicación
+	Se modifica el fichero web.xml para que se cargue la confiugración de Sprin al levantar el servidor
+	Se añade spring-web en las dpendencias del pom
