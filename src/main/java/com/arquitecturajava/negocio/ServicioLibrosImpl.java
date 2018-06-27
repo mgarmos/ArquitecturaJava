@@ -5,8 +5,6 @@ import java.util.List;
 import javax.transaction.Transactional;
 import javax.transaction.Transactional.TxType;
 
-import org.springframework.context.support.ClassPathXmlApplicationContext;
-
 import com.arquitecturajava.bean.Categoria;
 import com.arquitecturajava.bean.Libro;
 import com.arquitecturajava.dao.CategoriaDAO;
@@ -18,12 +16,26 @@ public class ServicioLibrosImpl implements ServicioLibros {
 	private LibroDAO libroDAO;
 	private CategoriaDAO categoriaDAO;
 	
-	
-	public ServicioLibrosImpl() {
-		ClassPathXmlApplicationContext factoria = new ClassPathXmlApplicationContext("contextoAplicacion.xml");
-		libroDAO = (LibroDAO)factoria.getBean("libroDAO");
-		categoriaDAO = (CategoriaDAO)factoria.getBean("categoriaDAO");
+	@Override
+	public LibroDAO getLibroDAO() {
+		return libroDAO;
 	}
+
+	@Override
+	public void setLibroDAO(LibroDAO libroDAO) {
+		this.libroDAO = libroDAO;
+	}
+
+	@Override
+	public CategoriaDAO getCategoriaDAO() {
+		return categoriaDAO;
+	}
+	
+	@Override
+	public void setCategoriaDAO(CategoriaDAO categoriaDAO) {
+		this.categoriaDAO = categoriaDAO;
+	}
+
 
 	@Override
 	public void salvarLibro(Libro libro) {

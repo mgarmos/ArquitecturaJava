@@ -1,0 +1,9 @@
+Objetivos: 
+• Eliminar repeticiones de código en cuanto a la inicialización de Spring. 
+• Centralizar la responsabilidad de crear los distintos objetos.
+
+Tareas: 
+1. Introducción al patrón de Inyección de Dependencia 
+2. Spring como framework de Inyección de dependencia. 
+3. Spring y factoría web. 
+4. Spring inyección de dependencia y Capa DAO.

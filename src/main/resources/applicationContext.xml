@@ -4,11 +4,15 @@
 	xsi:schemaLocation="
 http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
+	<bean id="servicioLibros" class="com.arquitecturajava.negocio.ServicioLibrosImpl">
+		<property name = "libroDAO" ref="libroDAO"></property>
+		<property name = "categoriaDAO" ref="categoriaDAO"></property>
+	</bean>
+
 	<bean id="libroDAO"
 		class="com.arquitecturajava.dao.hibernate.LibroDAOHibernateImpl">
 	</bean>
 	<bean id="categoriaDAO"
 		class="com.arquitecturajava.dao.hibernate.CategoriaDAOHibernateImpl">
 	</bean>
-
 </beans>

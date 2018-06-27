@@ -11,15 +11,16 @@ import javax.servlet.http.HttpServletResponse;
 import com.arquitecturajava.bean.Categoria;
 import com.arquitecturajava.bean.Libro;
 import com.arquitecturajava.negocio.ServicioLibros;
-import com.arquitecturajava.negocio.ServicioLibrosImpl;
 
 public class MostrarLibrosAccion extends Accion {
 
 	@Override
 	public void ejecutar(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		
-		ServicioLibros servicioLibros = new ServicioLibrosImpl();
+
+		// Se delega la responsabilidad de instanciar el objeto en Spring
+		// ServicioLibros servicioLibros = new ServicioLibrosImpl();
+		ServicioLibros servicioLibros = (ServicioLibros) getBean("servicioLibros");
 
 		// Cargar categorias
 		List<Categoria> listaCategorias = servicioLibros.buscarCategoriasLibros();
@@ -29,12 +30,12 @@ public class MostrarLibrosAccion extends Accion {
 		List<Libro> libros = null;
 
 		if (categoria != null && !categoria.equals("")) {
-			//Buscar libros por categoria
-			libros =  servicioLibros.buscarLibrosPorCategoria(categoria);
-			
+			// Buscar libros por categoria
+			libros = servicioLibros.buscarLibrosPorCategoria(categoria);
+
 		} else {
-			//Buscar todos los libros
-			libros =  servicioLibros.buscarTodosLosLibros();
+			// Buscar todos los libros
+			libros = servicioLibros.buscarTodosLosLibros();
 		}
 		request.setAttribute("libros", libros);
 
