@@ -7,21 +7,18 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.arquitecturajava.bean.Libro;
 import com.arquitecturajava.negocio.ServicioLibros;
-import com.arquitecturajava.negocio.ServicioLibrosImpl;
 
 public class BorrarLibroAccion extends Accion {
 
 	@Override
 	public void ejecutar(HttpServletRequest request, HttpServletResponse response) throws IOException {
-		
-		//Se delega la responsabilidad de instanciar el objeto en Spring
-		//ServicioLibros servicioLibros = new ServicioLibrosImpl();
-		ServicioLibros servicioLibros = (ServicioLibros)getBean("servicioLibros");
-		
+
+		ServicioLibros servicioLibros = (ServicioLibros) getBean("servicioLibros", request);
+
 		String isbn = request.getParameter("isbn");
 		Libro libro = new Libro(isbn);
-		
-		//Borrar libro
+
+		// Borrar libro
 		servicioLibros.borrarLibro(libro);
 
 		response.sendRedirect("MostrarLibros.do");

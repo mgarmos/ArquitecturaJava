@@ -18,7 +18,7 @@ public class LibroDAOHibernateImpl extends GenericDAOHibernateImpl<Libro, String
 		List<Libro> lista = null;
 
 		try {
-			session = HibernateHelper.getSessionFactory().openSession();
+			session = getSessionFactory().openSession();
 			transaccion = session.beginTransaction();
 			Query consulta = session
 					.createQuery("from Libro libro inner join fetch libro.categoria where categoria = :categoria");
@@ -45,7 +45,7 @@ public class LibroDAOHibernateImpl extends GenericDAOHibernateImpl<Libro, String
 		List<Libro> lista = null;
 
 		try {
-			session = HibernateHelper.getSessionFactory().openSession();
+			session = getSessionFactory().openSession();
 			transaccion = session.beginTransaction();
 			Query consulta = session.createQuery("from Libro libro inner join fetch libro.categoria");
 			lista = (List<Libro>)consulta.list();

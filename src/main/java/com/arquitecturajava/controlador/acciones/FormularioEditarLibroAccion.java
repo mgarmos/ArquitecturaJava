@@ -18,9 +18,7 @@ public class FormularioEditarLibroAccion extends Accion {
 	public void ejecutar(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		// Se delega la responsabilidad de instanciar el objeto en Spring
-		// ServicioLibros servicioLibros = new ServicioLibrosImpl();
-		ServicioLibros servicioLibros = (ServicioLibros) getBean("servicioLibros");
+		ServicioLibros servicioLibros = (ServicioLibros) getBean("servicioLibros", request);
 
 		// Buscar libro por clave
 		String isbn = request.getParameter("isbn");

@@ -12,6 +12,7 @@ import org.junit.Test;
 import com.arquitecturajava.bean.Categoria;
 import com.arquitecturajava.bean.Libro;
 import com.arquitecturajava.dao.LibroDAO;
+import com.arquitecturajava.utils.UtilSpring;
 
 public class LibroDAOHibernateImplTest {
 	
@@ -20,7 +21,8 @@ public class LibroDAOHibernateImplTest {
 	
 	@Before
 	public void setUp() throws Exception {
-		libroDAO = new LibroDAOHibernateImpl();
+		//Se instancia meediante Spring
+		libroDAO = (LibroDAO) UtilSpring.getBean("libroDAO");
 		assertNotNull(libroDAO);
 		System.out.println("libroDAO: " + libroDAO);
 	}

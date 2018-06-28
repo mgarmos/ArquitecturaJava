@@ -3,7 +3,35 @@ Objetivos:
 • Centralizar la responsabilidad de crear los distintos objetos.
 
 Tareas: 
-1. Introducción al patrón de Inyección de Dependencia 
+1. Introducción al patrón de Inyección de Dependencia
+	Inyección de Dependencia: Las dependencias que una clase tiene no deben ser asignadas por ella misma sino por un agente externo.
+	Para desacoplar las clases y permitir la inyección de dependencia definimos:
+	
+	• setLibroDAO(LibroDAOlibroDAO): Asigna un objeto de tipo LibroDAO a la clase de servicio 
+	• getLibroDAO(): Devuelve un objeto de tipo LibroDAO 
+	• setCategoriaDAO (CategoriaDAOcategoriaDAO): Asigna un objeto de tipo categoriaDAO a la clase de servicio. 
+	• getCategoriaDAO(): Devuelve un objeto de tipo CategoriaDAO
+	
+	Se modifican las acciones para que que delegan la instanciacion de ServicioLibros en Spring
+	Se modifica applicationContext para añadir la definición de ServicioLibros y sus dependencias.
+	
+	Inyección de dependencias en los DAO:
+	En GenericDAOHibernateImpl se está utilizando org.hibernate.Session -> Consultando en la página de Spring: https://docs.spring.io/spring/docs/3.0.x/spring-framework-reference/html/orm.html#orm-session-factory-setup se propone la solución ->
+	utilizar <bean id="mySessionFactory" class="org.springframework.orm.hibernate3.LocalSessionFactoryBean"> ->
+		-> Hay que añadir la dependencia de spring-orm en maven.
+		
+		--> Error al intentar crear el sessionFactory -> java.lang.NoClassDefFoundError: org/hibernate/context/CurrentSessionContext
+		https://stackoverflow.com/questions/9773066/java-lang-classnotfoundexception-if-i-use-either-hibernate-core-3-6-0-or-hiberna
+		HE cambiado a org.springframework.orm.hibernate4.LocalSessionFactoryBean -> OK Ahora da el error: Access to DialectResolutionInfo cannot be null when 'hibernate.dialect' not set --> Tiene sentido porque he comentado una propiedad -> Descomento ->OK
+		
+		Por ahora carga bien el contexto aunque no está enlazado el DAO con el Session.
+	
+	
 2. Spring como framework de Inyección de dependencia. 
 3. Spring y factoría web. 
 4. Spring inyección de dependencia y Capa DAO.
+
+TODO:
+Revisar la gestión de excepciones
+Revisar la página de error que noestá funcionando
+Revisar la geswtión del log

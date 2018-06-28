@@ -24,6 +24,6 @@ public class HibernateHelper {
 				.applySettings(configuration.getProperties()).build();
 		sessionFactory = configuration.buildSessionFactory(serviceRegistry);
 
-		return sessionFactory;
+		return sessionFactory; 
 	}
 }

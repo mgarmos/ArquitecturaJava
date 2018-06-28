@@ -6,17 +6,19 @@ import org.hibernate.SessionFactory;
 import org.junit.Before;
 import org.junit.Test;
 
+import com.arquitecturajava.utils.UtilSpring;
+
 public class HibernateHelperTest {
-	SessionFactory factory = null;
+	SessionFactory factoria = null;
 
 	@Before
 	public void setUp() throws Exception {
-		factory = HibernateHelper.getSessionFactory();
+		factoria = (SessionFactory)UtilSpring.getBean("sessionFactory");
 	}
 
-	@Test
+	//@Test
 	public void test() {
-		assertNotNull(factory);
+		assertNotNull(factoria);
 	}
 
 }

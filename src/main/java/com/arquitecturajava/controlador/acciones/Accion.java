@@ -6,9 +6,14 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.apache.log4j.Logger;
+import org.springframework.web.context.WebApplicationContext;
+import org.springframework.web.context.support.WebApplicationContextUtils;
+
+import com.arquitecturajava.controlador.ControladorLibros;
 
 public abstract class Accion {
+	final static Logger log = Logger.getLogger(ControladorLibros.class.getPackage().getName());
 
 	public abstract void ejecutar(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException;
@@ -28,7 +33,7 @@ public abstract class Accion {
 		} catch (IllegalAccessException e) {
 			e.printStackTrace();
 		} catch (ClassNotFoundException e) {
-			System.out.println("No se ha encontraado la clase: " + e.getLocalizedMessage());
+			log.error("No se ha encontraado la clase: " + e.getLocalizedMessage());
 			e.printStackTrace();
 		}
 
@@ -36,8 +41,16 @@ public abstract class Accion {
 	}
 
 	// Devuelve el bean solicitado a través de Sprint
-	public Object getBean(String nombre) {
-		ClassPathXmlApplicationContext factoria = new ClassPathXmlApplicationContext("applicationContext.xml");
+	public Object getBean(String nombre, HttpServletRequest request) {
+
+		/*
+		 * Se modifica para que el fichero de configuración se cargue una única vez
+		 * ClassPathXmlApplicationContext factoria = new
+		 * ClassPathXmlApplicationContext("applicationContext.xml"); 
+		 * return factoria.getBean(nombre);
+		 */
+		WebApplicationContext factoria = WebApplicationContextUtils
+				.getRequiredWebApplicationContext(request.getSession().getServletContext());
 		return factoria.getBean(nombre);
 	}
 

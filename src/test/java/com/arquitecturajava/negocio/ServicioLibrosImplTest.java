@@ -10,14 +10,16 @@ import org.junit.Test;
 
 import com.arquitecturajava.bean.Categoria;
 import com.arquitecturajava.bean.Libro;
+import com.arquitecturajava.utils.UtilSpring;
 
 public class ServicioLibrosImplTest {
-	ServicioLibros servicioLibros = new ServicioLibrosImpl();
+	//ServicioLibros servicioLibros = new ServicioLibrosImpl();
+	ServicioLibros servicioLibros = (ServicioLibros)UtilSpring.getBean("servicioLibros");
 	
 
 	@Before
 	public void setUp() throws Exception {
-		servicioLibros = new ServicioLibrosImpl();
+		servicioLibros = (ServicioLibros)UtilSpring.getBean("servicioLibros");
 		assertNotNull(servicioLibros);
 	}
 	
