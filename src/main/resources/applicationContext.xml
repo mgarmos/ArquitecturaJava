@@ -8,7 +8,7 @@ http://www.springframework.org/schema/beans http://www.springframework.org/schem
 		class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
 		<property name="driverClassName" value="org.sqlite.JDBC" />
 		<property name="url"
-			value="jdbc:sqlite:D:\\eclipse-workspace\\ArquitecturaJava\\BBDD\\arquitecturajava.db" />
+			value="jdbc:sqlite:./BBDD/arquitecturajava.db" />
 	</bean>
 
 	<bean id="sessionFactory"
