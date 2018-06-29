@@ -16,7 +16,7 @@ public class HibernateHelperTest {
 		factoria = (SessionFactory)UtilSpring.getBean("sessionFactory");
 	}
 
-	//@Test
+	@Test
 	public void test() {
 		assertNotNull(factoria);
 	}
